@@ -60,7 +60,7 @@ function moveShooter(e) {
 document.addEventListener('keydown', moveShooter)
 
 // add eventlistener for direction buttons, for use without keyboard
-btnLeft.addEventListener('click', function () {
+btnLeft.addEventListener('touchstart', function () {
   squares[currentShooterIndex].classList.remove('shooter')
   if (currentShooterIndex % width !== 0) {
     currentShooterIndex -= 1
@@ -69,7 +69,7 @@ btnLeft.addEventListener('click', function () {
 })
 
 
-btnRight.addEventListener('click', function () {
+btnRight.addEventListener('touchstart', function () {
   squares[currentShooterIndex].classList.remove('shooter')
   if (currentShooterIndex % width < width - 1) {
     currentShooterIndex += 1
@@ -179,7 +179,7 @@ document.addEventListener('keyup', shoot)
 
 //add shoot function to btnShoot 
 // change shoot function for keyboard and btn... its not dry
-btnShoot.addEventListener("click", function () {
+btnShoot.addEventListener("touchstart", function () {
   let laserId
   let currentLaserIndex = currentShooterIndex
   //move the laser from the shooter to the alien invader

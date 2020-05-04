@@ -99,11 +99,15 @@ h1 {
     margin-right: 0.5rem;
 }
 
+
 .note {
     margin: 2rem 0 0 0;
     color: rgb(162, 163, 163);
     font-weight: 600;
+    font-size: 0.8rem;
 }
+
+
 
 
 
