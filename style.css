@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    box-sizing: border-box;
+    background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
+    background-size: cover;
+    font-family: 'Jost', sans-serif;
+}
+
+
+#si-container {
+    /* background-color: rgb(231, 148, 162); */
+    padding: 4vh 10vw;
+    height: 100vh;
+    width: 60%;
+    /* Photo by Jordan McQueen on Unsplash */
+    /* background: url(/images/jordan-mcqueen-big4.jpg);
+    background-size: cover; */
+    border-left: 4px solid white;
+    border-right: 4px solid white;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.7rem;
+    color: white;
+    margin-bottom: 1rem;
+    /* font-family: 'Poppins', sans-serif; */
+    font-weight: 700;
+    /* font-style: italic; */
+    letter-spacing: 0.9rem;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    font-family: 'Oswald', sans-serif;
+
+}
+
+.refresh-btn {
+    margin: 2rem 0 1rem 0;
+    background-color: transparent;
+    color: rgb(131, 255, 238);
+    font-weight: bold;
+    border: 0.2rem solid rgb(131, 255, 238);
+    padding: 0.2rem 0.5rem;
+    letter-spacing: 0.05rem;
+    font-size: 1.2rem;
+    height: 2.2rem;
+}
+
+.score {
+    margin-bottom: 3rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: rgb(162, 255, 56);
+    text-shadow: -2px 0 rgb(6, 16, 110), 0 2px rgb(6, 16, 110), 2px 0 rgb(6, 16, 110), 0 -2px rgb(6, 16, 110);
+}
+
+.grid {
+    /* background-color: rgb(160, 204, 160); */
+    display: flex;
+    flex-wrap: wrap;
+    width: 375px;
+    height: 375px;
+
+    margin: 0 auto 2rem auto;
+    /* border: 0.21rem solid rgb(172, 172, 172); */
+}
+
+.grid div {
+    width: 25px;
+    height: 25px;
+    /* justify-content: space-around; */
+}
+
+.shooter {
+    /* background-color: blue; */
+    content: url(images/space-invaders1.png);
+}
+
+.invader {
+    background-color: rgb(255, 103, 255);
+    /* content: url(images/iconfinder_Invader_1_367629.svg) */
+    clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
+    /* content: url(images/invader1.png); */
+}
+
+.boom {
+    background-color: rgb(255, 251, 21);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+}
+
+.laser {
+    clip-path: polygon(46% 1%, 56% 0, 67% 100%, 30% 100%);
+    clip-path: polygon(48% 0, 54% 0, 65% 100%, 40% 100%);
+
+
+    background-color: orange;
+}
