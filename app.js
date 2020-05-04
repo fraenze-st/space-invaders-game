@@ -7,6 +7,9 @@ for (let i = 0; i < 225; i++) {
 
 const squares = document.querySelectorAll('.grid div')
 const resultDisplay = document.querySelector('#result')
+const btnShoot = document.querySelector(".btn-shoot")
+const btnLeft = document.querySelector(".btn-left")
+const btnRight = document.querySelector(".btn-right")
 
 var shootSound;
 var boomSound;
@@ -52,7 +55,27 @@ function moveShooter(e) {
   }
   squares[currentShooterIndex].classList.add('shooter')
 }
+
+
 document.addEventListener('keydown', moveShooter)
+
+// add eventlistener for direction buttons, for use without keyboard
+btnLeft.addEventListener('click', function () {
+  squares[currentShooterIndex].classList.remove('shooter')
+  if (currentShooterIndex % width !== 0) {
+    currentShooterIndex -= 1
+  }
+  squares[currentShooterIndex].classList.add('shooter')
+})
+
+
+btnRight.addEventListener('click', function () {
+  squares[currentShooterIndex].classList.remove('shooter')
+  if (currentShooterIndex % width < width - 1) {
+    currentShooterIndex += 1
+  }
+  squares[currentShooterIndex].classList.add('shooter')
+})
 
 //move the alien invaders
 function moveInvaders() {
@@ -113,8 +136,6 @@ function shoot(e) {
   let currentLaserIndex = currentShooterIndex
   //move the laser from the shooter to the alien invader
 
-
-
   function moveLaser() {
     squares[currentLaserIndex].classList.remove('laser')
 
@@ -144,12 +165,6 @@ function shoot(e) {
 
   }
 
-  // document.addEventListener('keyup', e => {
-  //   if (e.keyCode === 32) {
-  //     laserId = setInterval(moveLaser, 100)
-  //   }
-  // })
-
   switch (e.keyCode) {
     case 32:
       laserId = setInterval(moveLaser, 100)
@@ -160,3 +175,43 @@ function shoot(e) {
 }
 
 document.addEventListener('keyup', shoot)
+
+
+//add shoot function to btnShoot 
+// change shoot function for keyboard and btn... its not dry
+btnShoot.addEventListener("click", function () {
+  let laserId
+  let currentLaserIndex = currentShooterIndex
+  //move the laser from the shooter to the alien invader
+
+  function moveLaser() {
+    squares[currentLaserIndex].classList.remove('laser')
+
+    currentLaserIndex -= width
+    squares[currentLaserIndex].classList.add('laser')
+    if (squares[currentLaserIndex].classList.contains('invader')) {
+      squares[currentLaserIndex].classList.remove('laser')
+      squares[currentLaserIndex].classList.remove('invader')
+      squares[currentLaserIndex].classList.add('boom')
+      boomSound = new Audio("boom.wav");
+      boomSound.play();
+      setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250)
+      clearInterval(laserId)
+
+      const alienTakenDown = alienInvaders.indexOf(currentLaserIndex)
+      alienInvadersTakenDown.push(alienTakenDown)
+      result++
+      resultDisplay.textContent = result
+    }
+
+    if (currentLaserIndex < width) {
+      clearInterval(laserId)
+      setTimeout(() => squares[currentLaserIndex].classList.remove('laser'), 100)
+    }
+
+  }
+
+  laserId = setInterval(moveLaser, 100)
+  shootSound = new Audio("shoot.wav");
+  shootSound.play();
+})

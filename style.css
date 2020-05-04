@@ -9,13 +9,14 @@ body {
     background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
     font-family: 'Jost', sans-serif;
+    height: 100vh;
 }
 
 
 #si-container {
     /* background-color: rgb(231, 148, 162); */
-    padding: 4vh 10vw;
-    height: 100vh;
+    padding: 4vh 10vw 2vh 10vw;
+    /* height: 100vh; */
     width: 60%;
     /* Photo by Jordan McQueen on Unsplash */
     /* background: url(/images/jordan-mcqueen-big4.jpg);
@@ -52,7 +53,7 @@ h1 {
 }
 
 .score {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-weight: 700;
     font-size: 1.4rem;
     color: rgb(162, 255, 56);
@@ -66,7 +67,7 @@ h1 {
     width: 375px;
     height: 375px;
 
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1rem auto;
     /* border: 0.21rem solid rgb(172, 172, 172); */
 }
 
@@ -75,6 +76,36 @@ h1 {
     height: 25px;
     /* justify-content: space-around; */
 }
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.si-btn {
+    margin: 0.5rem 0 1rem 0;
+    background-color: transparent;
+    color: rgb(131, 255, 238);
+    font-weight: bold;
+    border: 0.2rem solid rgb(131, 255, 238);
+    padding: 0.2rem 0.5rem;
+    letter-spacing: 0.05rem;
+    font-size: 1.2rem;
+    height: 2.2rem;
+}
+
+.btn-left {
+    margin-right: 0.5rem;
+}
+
+.note {
+    margin: 2rem 0 0 0;
+    color: rgb(162, 163, 163);
+    font-weight: 600;
+}
+
+
 
 .shooter {
     /* background-color: blue; */
