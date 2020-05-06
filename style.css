@@ -179,6 +179,7 @@ h1 {
         font-size: 1.9rem;
         letter-spacing: 0.4rem;
         line-height: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     #si-container {
@@ -193,10 +194,14 @@ h1 {
         font-size: 1rem;
     }
 
+    .refresh-btn {
+        margin: 3rem 0 0.3rem 0;
+    }
+
     .grid {
         width: 300px;
         height: 300px;
-        margin: 0 auto 1rem auto;
+        margin: 0 auto 3rem auto;
     }
 
     .grid div {
@@ -235,6 +240,10 @@ h1 {
     #si-container {
         width: 100%;
         padding: 3vh 3vw;
+    }
+
+    .refresh-btn {
+        margin: 1rem 0 0.3rem 0;
     }
 
     .score {
