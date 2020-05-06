@@ -122,7 +122,14 @@ h1 {
 }
 
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+
+    body {
+        /* Photo by Nasa on Unsplash */
+        background: url(/images/nasa-medium.jpg);
+        background-size: cover;
+    }
+
     h1 {
         font-size: 2.6rem;
         letter-spacing: 0.7rem;
@@ -164,6 +171,11 @@ h1 {
         letter-spacing: 0.05rem;
         font-size: 1.3rem;
         height: 2.2rem;
+    }
+
+    .note {
+        visibility: hidden;
+        /* display: none; */
     }
 
 }
@@ -225,10 +237,6 @@ h1 {
         padding-right: 1rem;
     }
 
-    .note {
-        visibility: hidden;
-        display: none;
-    }
 
 }
 
