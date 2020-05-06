@@ -10,6 +10,8 @@ const resultDisplay = document.querySelector('#result')
 const btnShoot = document.querySelector(".btn-shoot")
 const btnLeft = document.querySelector(".btn-left")
 const btnRight = document.querySelector(".btn-right")
+const shooter = document.querySelector('.shooter')
+const displayGameOver = document.querySelector("#game-over")
 
 var shootSound;
 var boomSound;
@@ -102,19 +104,18 @@ function moveInvaders() {
   }
 
   if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
-    resultDisplay.textContent = 'Game Over'
+    displayGameOver.textContent = ' - Game Over'
     squares[currentShooterIndex].classList.add('boom')
-    document.removeEventListener('keyup', shoot)
-    btnShoot.removeEventListener("touchstart");
+    btnShoot.removeEventListener("touchstart", shoot);
+
 
     clearInterval(invaderId)
   }
 
   for (let i = 0; i <= alienInvaders.length - 1; i++) {
     if (alienInvaders[i] > (squares.length - (width - 1))) {
-      resultDisplay.textContent = 'Game Over'
-      document.removeEventListener('keyup', shoot)
-      btnShoot.removeEventListener("touchstart");
+      displayGameOver.textContent = ' - Game Over'
+      btnShoot.removeEventListener("touchstart", shoot);
       clearInterval(invaderId)
     }
   }
@@ -123,9 +124,8 @@ function moveInvaders() {
   if (alienInvadersTakenDown.length === alienInvaders.length) {
     console.log(alienInvadersTakenDown.length)
     console.log(alienInvaders.length)
-    resultDisplay.textContent = 'You Win'
-    document.removeEventListener('keyup', shoot)
-    btnShoot.removeEventListener("touchstart");
+    displayGameOver.textContent = '- You Win'
+
     clearInterval(invaderId)
   }
 }
@@ -134,56 +134,7 @@ setTimeout(() => invaderId = setInterval(moveInvaders, 500), 1000)
 
 
 //shoot at aliens
-function shoot(e) {
-  let laserId
-  let currentLaserIndex = currentShooterIndex
-  //move the laser from the shooter to the alien invader
-
-  function moveLaser() {
-    squares[currentLaserIndex].classList.remove('laser')
-
-    currentLaserIndex -= width
-    squares[currentLaserIndex].classList.add('laser')
-    if (squares[currentLaserIndex].classList.contains('invader')) {
-      squares[currentLaserIndex].classList.remove('laser')
-      squares[currentLaserIndex].classList.remove('invader')
-      squares[currentLaserIndex].classList.add('boom')
-      boomSound = new Audio("boom.wav");
-      boomSound.play();
-      setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250)
-      clearInterval(laserId)
-
-      const alienTakenDown = alienInvaders.indexOf(currentLaserIndex)
-      alienInvadersTakenDown.push(alienTakenDown)
-      result++
-      resultDisplay.textContent = result
-    }
-
-
-
-    if (currentLaserIndex < width) {
-      clearInterval(laserId)
-      setTimeout(() => squares[currentLaserIndex].classList.remove('laser'), 100)
-    }
-
-  }
-
-  switch (e.keyCode) {
-    case 32:
-      laserId = setInterval(moveLaser, 100)
-      shootSound = new Audio("shoot.wav");
-      shootSound.play();
-      break
-  }
-}
-
-document.addEventListener('keyup', shoot);
-
-
-
-//add shoot function to btnShoot 
-// change shoot function for keyboard and btn... its not dry
-btnShoot.addEventListener("touchstart", function () {
+function shoot() {
   let laserId
   let currentLaserIndex = currentShooterIndex
   //move the laser from the shooter to the alien invader
@@ -218,4 +169,14 @@ btnShoot.addEventListener("touchstart", function () {
   laserId = setInterval(moveLaser, 100)
   shootSound = new Audio("shoot.wav");
   shootSound.play();
+}
+
+//press key: spacebar for shooting
+document.addEventListener('keyup', e => {
+  if (e.keyCode === 32) {
+    shoot()
+  }
 })
+
+//touch button schiessen and shoot
+btnShoot.addEventListener("touchstart", shoot);
