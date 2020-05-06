@@ -10,7 +10,6 @@ body {
     background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
     font-family: 'Jost', sans-serif;
-    height: 100vh;
 }
 
 
@@ -19,6 +18,7 @@ body {
     padding: 4vh 8vw 2vh 8vw;
     /* height: 100vh; */
     width: 65%;
+    height: 100vh;
     border-left: 4px solid white;
     border-right: 4px solid white;
     margin: 0 auto;
@@ -90,7 +90,7 @@ h1 {
 
 /* note for use of keyboard and buttons */
 .note {
-    margin: 2rem 0 0 0;
+    margin: 3rem 0 0 0;
     color: rgb(162, 163, 163);
     font-weight: 600;
     font-size: 0.8rem;
@@ -124,8 +124,9 @@ h1 {
 
 @media (max-width: 900px) {
     h1 {
-        font-size: 2.4rem;
+        font-size: 2.6rem;
         letter-spacing: 0.7rem;
+        margin-bottom: 3rem;
     }
 
     #si-container {
@@ -138,16 +139,16 @@ h1 {
 
 
     .score {
-        margin-bottom: 1rem;
+        margin-bottom: 6rem;
         font-weight: 700;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
     .grid {
         width: 330px;
         height: 330px;
 
-        margin: 0 auto 1rem auto;
+        margin: 0 auto 6rem auto;
     }
 
     .grid div {
@@ -161,8 +162,8 @@ h1 {
         border: 0.2rem solid rgb(131, 255, 238);
         padding: 0.2rem 0.5rem;
         letter-spacing: 0.05rem;
-        font-size: 1.1rem;
-        height: 2rem;
+        font-size: 1.3rem;
+        height: 2.2rem;
     }
 
 }
@@ -184,12 +185,12 @@ h1 {
 
     #si-container {
         width: 100%;
-        padding: 4vh 3vw;
-        margin: 0;
+        margin: 4vh 3vw;
+        padding: 0;
     }
 
     .score {
-        margin-bottom: 1.2rem;
+        margin-bottom: 4rem;
         font-weight: 600;
         font-size: 1rem;
     }
@@ -201,7 +202,7 @@ h1 {
     .grid {
         width: 300px;
         height: 300px;
-        margin: 0 auto 3rem auto;
+        margin: 0 auto 4rem auto;
     }
 
     .grid div {
@@ -226,6 +227,7 @@ h1 {
 
     .note {
         visibility: hidden;
+        display: none;
     }
 
 }
@@ -239,7 +241,7 @@ h1 {
 
     #si-container {
         width: 100%;
-        padding: 3vh 3vw;
+        margin: 3vh 3vw;
     }
 
     .refresh-btn {
@@ -247,7 +249,7 @@ h1 {
     }
 
     .score {
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
         font-weight: 600;
         font-size: 0.9rem;
     }
@@ -255,7 +257,7 @@ h1 {
     .grid {
         width: 270px;
         height: 270px;
-        margin: 0 auto 1rem auto;
+        margin: 0 auto 3rem auto;
     }
 
     .grid div {
