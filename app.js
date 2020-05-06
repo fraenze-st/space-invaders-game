@@ -95,7 +95,7 @@ function moveInvaders() {
     alienInvaders[i] += direction
   }
   for (let i = 0; i <= alienInvaders.length - 1; i++) {
-    //ADD IF LATER
+
     if (!alienInvadersTakenDown.includes(i)) {
       squares[alienInvaders[i]].classList.add('invader')
     }
@@ -105,6 +105,7 @@ function moveInvaders() {
     resultDisplay.textContent = 'Game Over'
     squares[currentShooterIndex].classList.add('boom')
     document.removeEventListener('keyup', shoot)
+    btnShoot.removeEventListener("touchstart");
 
     clearInterval(invaderId)
   }
@@ -113,16 +114,18 @@ function moveInvaders() {
     if (alienInvaders[i] > (squares.length - (width - 1))) {
       resultDisplay.textContent = 'Game Over'
       document.removeEventListener('keyup', shoot)
+      btnShoot.removeEventListener("touchstart");
       clearInterval(invaderId)
     }
   }
 
-  //ADD LATER
+  //you hit all alienInvaders => you win
   if (alienInvadersTakenDown.length === alienInvaders.length) {
     console.log(alienInvadersTakenDown.length)
     console.log(alienInvaders.length)
     resultDisplay.textContent = 'You Win'
     document.removeEventListener('keyup', shoot)
+    btnShoot.removeEventListener("touchstart");
     clearInterval(invaderId)
   }
 }
@@ -174,7 +177,8 @@ function shoot(e) {
   }
 }
 
-document.addEventListener('keyup', shoot)
+document.addEventListener('keyup', shoot);
+
 
 
 //add shoot function to btnShoot 
