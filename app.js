@@ -34,10 +34,6 @@ const alienInvaders = [
   45, 46, 47, 48, 49, 50, 51, 52, 53, 54
 ]
 
-// for (let i = 0; i < alienInvaders.length; i++) {
-//   squares[alienInvaders[i]].classList.add("alien-1")
-// };
-
 //draw the alien invaders
 alienInvaders.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader'))
 
@@ -124,7 +120,7 @@ function moveInvaders() {
   if (alienInvadersTakenDown.length === alienInvaders.length) {
     console.log(alienInvadersTakenDown.length)
     console.log(alienInvaders.length)
-    displayGameOver.textContent = '- You Win'
+    displayGameOver.textContent = ' - You Win'
 
     clearInterval(invaderId)
   }
@@ -148,7 +144,7 @@ function shoot() {
       squares[currentLaserIndex].classList.remove('laser')
       squares[currentLaserIndex].classList.remove('invader')
       squares[currentLaserIndex].classList.add('boom')
-      boomSound = new Audio("boom.wav");
+      boomSound = new Audio("/sound/boom.wav");
       boomSound.play();
       setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250)
       clearInterval(laserId)
@@ -167,7 +163,7 @@ function shoot() {
   }
 
   laserId = setInterval(moveLaser, 100)
-  shootSound = new Audio("shoot.wav");
+  shootSound = new Audio("/sound/shoot.wav");
   shootSound.play();
 }
 
