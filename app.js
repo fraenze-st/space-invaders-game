@@ -13,9 +13,9 @@ const btnRight = document.querySelector(".btn-right")
 const shooter = document.querySelector('.shooter')
 const displayGameOver = document.querySelector("#game-over")
 
+
 var shootSound;
 var boomSound;
-
 
 
 let width = 15
@@ -43,19 +43,26 @@ squares[currentShooterIndex].classList.add('shooter')
 //move the shooter along a line
 function moveShooter(e) {
   squares[currentShooterIndex].classList.remove('shooter')
+
   switch (e.keyCode) {
     case 37:
       if (currentShooterIndex % width !== 0) currentShooterIndex -= 1
+      btnLeft.classList.add("color-btn-dir")
+      setTimeout(() => btnLeft.classList.remove("color-btn-dir"), 600)
       break
     case 39:
       if (currentShooterIndex % width < width - 1) currentShooterIndex += 1
+      btnRight.classList.add("color-btn-dir")
+      setTimeout(() => btnRight.classList.remove("color-btn-dir"), 600)
       break
   }
   squares[currentShooterIndex].classList.add('shooter')
+
 }
 
 
-document.addEventListener('keydown', moveShooter)
+document.addEventListener('keydown', moveShooter);
+
 
 // add eventlistener for direction buttons, for use without keyboard
 btnLeft.addEventListener('touchstart', function () {
@@ -65,7 +72,6 @@ btnLeft.addEventListener('touchstart', function () {
   }
   squares[currentShooterIndex].classList.add('shooter')
 })
-
 
 btnRight.addEventListener('touchstart', function () {
   squares[currentShooterIndex].classList.remove('shooter')
@@ -99,11 +105,11 @@ function moveInvaders() {
     }
   }
 
+
   if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
     displayGameOver.textContent = ' - Game Over'
     squares[currentShooterIndex].classList.add('boom')
     btnShoot.removeEventListener("touchstart", shoot);
-
 
     clearInterval(invaderId)
   }
@@ -126,13 +132,24 @@ function moveInvaders() {
   }
 }
 
-setTimeout(() => invaderId = setInterval(moveInvaders, 500), 1000)
+//set intervall, faster for big screen with keyboard
+const mediaQuery = window.matchMedia("(min-width: 960px)");
+
+if (mediaQuery.matches) {
+  // alert("window width >= 960px");
+  invaderId = setInterval(moveInvaders, 250), 1000
+} else {
+  invaderId = setInterval(moveInvaders, 450), 1000
+}
+
 
 
 //shoot at aliens
 function shoot() {
+
   let laserId
   let currentLaserIndex = currentShooterIndex
+
   //move the laser from the shooter to the alien invader
 
   function moveLaser() {
@@ -146,6 +163,7 @@ function shoot() {
       squares[currentLaserIndex].classList.add('boom')
       boomSound = new Audio("/sound/boom.wav");
       boomSound.play();
+
       setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250)
       clearInterval(laserId)
 
@@ -171,8 +189,18 @@ function shoot() {
 document.addEventListener('keyup', e => {
   if (e.keyCode === 32) {
     shoot()
+    btnShoot.classList.add("color-shooter")
+    setTimeout(() => btnShoot.classList.remove("color-shooter"), 600)
   }
 })
 
 //touch button schiessen and shoot
 btnShoot.addEventListener("touchstart", shoot);
+
+
+
+
+
+// if (window.innerWidth < 960) {
+//   doSomething();
+// }
