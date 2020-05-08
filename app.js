@@ -137,9 +137,9 @@ const mediaQuery = window.matchMedia("(min-width: 960px)");
 
 if (mediaQuery.matches) {
   // alert("window width >= 960px");
-  invaderId = setInterval(moveInvaders, 250), 1000
+  invaderId = setInterval(moveInvaders, 500), 1000
 } else {
-  invaderId = setInterval(moveInvaders, 450), 1000
+  invaderId = setInterval(moveInvaders, 550), 1000
 }
 
 
@@ -149,17 +149,24 @@ function shoot() {
 
   let laserId
   let currentLaserIndex = currentShooterIndex
+  //remove eventlisteners for shooting, so in can shoot only once at a time
+  document.removeEventListener('keyup', spacebarShoot)
+  btnShoot.removeEventListener("touchstart", shoot);
 
   //move the laser from the shooter to the alien invader
-
   function moveLaser() {
     squares[currentLaserIndex].classList.remove('laser')
 
     currentLaserIndex -= width
     squares[currentLaserIndex].classList.add('laser')
+
+
     if (squares[currentLaserIndex].classList.contains('invader')) {
       squares[currentLaserIndex].classList.remove('laser')
       squares[currentLaserIndex].classList.remove('invader')
+      document.addEventListener('keyup', spacebarShoot)
+      btnShoot.addEventListener("touchstart", shoot);
+
       squares[currentLaserIndex].classList.add('boom')
       boomSound = new Audio("/sound/boom.wav");
       boomSound.play();
@@ -176,6 +183,8 @@ function shoot() {
     if (currentLaserIndex < width) {
       clearInterval(laserId)
       setTimeout(() => squares[currentLaserIndex].classList.remove('laser'), 100)
+      document.addEventListener('keyup', spacebarShoot)
+      btnShoot.addEventListener("touchstart", shoot);
     }
 
   }
@@ -185,22 +194,21 @@ function shoot() {
   shootSound.play();
 }
 
+
+
+
 //press key: spacebar for shooting
-document.addEventListener('keyup', e => {
+//can only shoot, when laser hit invader or reaches end of grid
+document.addEventListener('keyup', spacebarShoot)
+
+function spacebarShoot(e) {
   if (e.keyCode === 32) {
     shoot()
     btnShoot.classList.add("color-shooter")
     setTimeout(() => btnShoot.classList.remove("color-shooter"), 600)
   }
-})
+}
+
 
 //touch button schiessen and shoot
 btnShoot.addEventListener("touchstart", shoot);
-
-
-
-
-
-// if (window.innerWidth < 960) {
-//   doSomething();
-// }
