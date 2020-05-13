@@ -1,4 +1,4 @@
-for (let i = 0; i < 225; i++) {
+for (let i = 0; i < 255; i++) {
     var divElement = document.createElement("Div");
     document.querySelector(".grid").appendChild(divElement);
 }
@@ -18,7 +18,7 @@ var shootSound;
 var boomSound;
 
 
-let width = 15
+let width = 17
 let currentShooterIndex = 202
 let currentInvaderIndex = 0
 let alienInvadersTakenDown = []
@@ -33,15 +33,20 @@ let invaderId
 
 //define the alien invaders in different ranks
 const alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-const alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-const alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
-const alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
+const alienInvaders3 = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+const alienInvaders2 = [34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
+const alienInvaders1 = [51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
+
+
+// const alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+// const alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+// const alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
 // 40 invaders
 
 //push the 4 diffrent alienInvaders-Arrays ind one array
 const alienInvaders = []
 alienInvaders.push(...alienInvaders1, ...alienInvaders2, ...alienInvaders3, ...alienInvaders4)
-console.log(alienInvaders)
+// console.log(alienInvaders)
 
 //draw the alien invaders
 alienInvaders1.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader1', 'invader'))
@@ -181,7 +186,7 @@ function moveInvaders() {
     }
 
     for (let i = 0; i <= alienInvaders.length - 1; i++) {
-        if (alienInvaders[i] > (squares.length - (width - 1))) {
+        if (alienInvaders[i] > (squares.length - (15 - 1))) {
             displayGameOver.textContent = ' - Game Over'
             btnShoot.removeEventListener("touchstart", shoot);
             clearInterval(invaderId)
@@ -227,6 +232,22 @@ function shoot() {
 
         //if laser hits invader
         if (squares[currentLaserIndex].classList.contains('invader')) {
+
+            //change score, depending on rank of invader
+            if (squares[currentLaserIndex].classList.contains('invader4')) {
+                result = result + 50
+                resultDisplay.textContent = result
+            } else if (squares[currentLaserIndex].classList.contains('invader3')) {
+                result = result + 30
+                resultDisplay.textContent = result
+            } else if (squares[currentLaserIndex].classList.contains('invader2')) {
+                result = result + 15
+                resultDisplay.textContent = result
+            } else if (squares[currentLaserIndex].classList.contains('invader1')) {
+                result = result + 5
+                resultDisplay.textContent = result
+            }
+
             squares[currentLaserIndex].classList.remove('laser')
             squares[currentLaserIndex].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4')
 
@@ -256,9 +277,6 @@ function shoot() {
             alienInvadersTakenDown2.push(alienTakenDown2)
             alienInvadersTakenDown1.push(alienTakenDown1)
 
-            //change score
-            result++
-            resultDisplay.textContent = result
         }
 
         if (currentLaserIndex < width) {

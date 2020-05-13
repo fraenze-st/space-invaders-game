@@ -15,8 +15,18 @@
 <body>
     <div id="si-container">
         <h1>Space Invaders</h1>
-        <button class="si-btn refresh-btn" onClick="window.location.reload();">Reload</button>
-        <h3 class="score">Score: <span id="result"></span><span id="game-over"></span></h3>
+        <div class=top-container>
+            <div class="tc-left">
+                <button class="si-btn refresh-btn" onClick="window.location.reload();">Reload</button>
+                <h3 class="score">Score: <span id="result"></span><span id="game-over"></span></h3>
+            </div>
+            <div class="tc-right">
+                <h3 class="tc-invader-score"><span class="invader4"></span> = 50 Punkte</h3>
+                <h3 class="tc-invader-score"><span class="invader3"></span> = 30 Punkte</h3>
+                <h3 class="tc-invader-score"><span class="invader2"></span> = 15 Punkte</h3>
+                <h3 class="tc-invader-score"><span class="invader1"></span> = 5 Punkte</h3>
+            </div>
+        </div>
         <div class="grid-container">
             <div class="grid">
             </div>

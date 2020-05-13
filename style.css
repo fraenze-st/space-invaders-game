@@ -16,9 +16,9 @@ body {
 
 #si-container {
 
-    padding: 4vh 8vw 2vh 8vw;
+    padding: 4vh 4vw 2vh 4vw;
     /* height: 100vh; */
-    width: 65%;
+    width: 75%;
     height: 100vh;
     border-left: 4px solid white;
     border-right: 4px solid white;
@@ -37,9 +37,33 @@ h1 {
 
 }
 
+.top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem 0;
+
+}
+
+.tc-right {
+    color: rgb(162, 255, 56);
+    padding-top: 1rem;
+    font-size: 0.7rem;
+
+}
+
+.tc-invader-score {
+    align-items: flex-start;
+}
+
+.tc-right span {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
 
 .score {
-    margin-bottom: 2rem;
+
     font-weight: 700;
     font-size: 1.4rem;
     color: rgb(162, 255, 56);
@@ -47,14 +71,11 @@ h1 {
 }
 
 .grid {
-    /* background-color: rgb(160, 204, 160); */
     display: flex;
     flex-wrap: wrap;
-    width: 375px;
+    width: 425px;
     height: 375px;
-
     margin: 0 auto 1rem auto;
-    /* border: 0.21rem solid rgb(172, 172, 172); */
 }
 
 .grid div {
@@ -64,7 +85,6 @@ h1 {
 
 /* buttons */
 .si-btn {
-    /* margin: 0.5rem 0 1rem 0; */
     background-color: transparent;
     color: rgb(131, 255, 238);
     font-weight: bold;
@@ -76,7 +96,7 @@ h1 {
 }
 
 .refresh-btn {
-    margin: 2rem 0 1rem 0;
+    margin: 0 0 1rem 0;
 }
 
 .btn-container {
@@ -103,35 +123,31 @@ h1 {
 
 /* game objects */
 .shooter {
-    /* background-color: blue; */
     content: url(images/space-invaders1.png);
 }
 
 .invader {
-    background-color: rgb(255, 103, 255);
-    /* content: url(images/iconfinder_Invader_1_367629.svg) */
     clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
-    /* content: url(images/invader1.png); */
 }
 
 .invader1 {
     background-color: rgb(20, 214, 182);
-    clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
+    clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 .invader2 {
     background-color: rgb(255, 106, 243);
-    clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
+    clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 .invader3 {
     background-color: rgb(67, 251, 107);
-    clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
+    clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 .invader4 {
     background-color: rgb(200, 123, 251);
-    clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
+    clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 
@@ -189,7 +205,7 @@ h1 {
     }
 
     .grid {
-        width: 330px;
+        width: 374px;
         height: 330px;
 
         margin: 0 auto 6rem auto;
@@ -249,7 +265,7 @@ h1 {
     }
 
     .grid {
-        width: 300px;
+        width: 340px;
         height: 300px;
         margin: 0 auto 4rem auto;
     }
@@ -307,7 +323,7 @@ h1 {
     }
 
     .grid {
-        width: 270px;
+        width: 306px;
         height: 270px;
         margin: 0 auto 3rem auto;
     }
