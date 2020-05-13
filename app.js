@@ -12,6 +12,10 @@ const btnLeft = document.querySelector(".btn-left")
 const btnRight = document.querySelector(".btn-right")
 const shooter = document.querySelector('.shooter')
 const displayGameOver = document.querySelector("#game-over")
+let livesDisplay = document.querySelector('#lives')
+// alien drop bombs
+
+
 
 
 var shootSound;
@@ -19,7 +23,7 @@ var boomSound;
 
 
 let width = 17
-let currentShooterIndex = 202
+let currentShooterIndex = 248
 let currentInvaderIndex = 0
 let alienInvadersTakenDown = []
 let alienInvadersTakenDown1 = []
@@ -28,6 +32,9 @@ let alienInvadersTakenDown3 = []
 let alienInvadersTakenDown4 = []
 
 let result = 0
+let lives = 4
+livesDisplay.textContent = lives
+
 let direction = 1
 let invaderId
 
@@ -37,11 +44,6 @@ const alienInvaders3 = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
 const alienInvaders2 = [34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
 const alienInvaders1 = [51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
 
-
-// const alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-// const alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
-// const alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
-// 40 invaders
 
 //push the 4 diffrent alienInvaders-Arrays ind one array
 const alienInvaders = []
@@ -183,14 +185,24 @@ function moveInvaders() {
         btnShoot.removeEventListener("touchstart", shoot);
 
         clearInterval(invaderId)
+        clearInterval(bombDrop)
     }
 
     for (let i = 0; i <= alienInvaders.length - 1; i++) {
-        if (alienInvaders[i] > (squares.length - (15 - 1))) {
+        if (alienInvaders[i] > (squares.length - (width - 1))) {
             displayGameOver.textContent = ' - Game Over'
             btnShoot.removeEventListener("touchstart", shoot);
             clearInterval(invaderId)
+            clearInterval(bombDrop)
         }
+    }
+
+    // no lives 
+    if (lives === 0) {
+        displayGameOver.textContent = ' - Game Over'
+        btnShoot.removeEventListener("touchstart", shoot);
+        clearInterval(invaderId)
+        clearInterval(bombDrop)
     }
 
     //you hit all alienInvaders => you win
@@ -225,8 +237,8 @@ function shoot() {
 
     //move the laser from the shooter to the alien invader
     function moveLaser() {
+        // let laser move (by adding and removing laser)
         squares[currentLaserIndex].classList.remove('laser')
-
         currentLaserIndex -= width
         squares[currentLaserIndex].classList.add('laser')
 
@@ -254,9 +266,9 @@ function shoot() {
             //you can shoot again
             document.addEventListener('keyup', spacebarShoot)
             btnShoot.addEventListener("touchstart", shoot);
-
-            //add boom sound
             squares[currentLaserIndex].classList.add('boom')
+            //add boom sound
+
             boomSound = new Audio("/sound/boom.wav");
             boomSound.play();
 
@@ -276,7 +288,6 @@ function shoot() {
             alienInvadersTakenDown3.push(alienTakenDown3)
             alienInvadersTakenDown2.push(alienTakenDown2)
             alienInvadersTakenDown1.push(alienTakenDown1)
-
         }
 
         if (currentLaserIndex < width) {
@@ -293,9 +304,6 @@ function shoot() {
     shootSound.play();
 }
 
-
-
-
 //press key: spacebar for shooting
 //can only shoot, when laser hit invader or reaches end of grid
 document.addEventListener('keyup', spacebarShoot)
@@ -311,3 +319,63 @@ function spacebarShoot(e) {
 
 //touch button schiessen and shoot
 btnShoot.addEventListener("touchstart", shoot);
+
+
+//alien invaders are dropping bombs
+function dropBomb() {
+
+    let bombId
+    let currentBombIndex = alienInvaders4[Math.floor(Math.random() * alienInvaders4.length)];
+    // squares[currentBombIndex].classList.add('bomb')
+
+    function moveBomb() {
+        //move bomb
+        squares[currentBombIndex].classList.remove('bomb')
+        currentBombIndex += width
+        squares[currentBombIndex].classList.add('bomb')
+        // console.log(currentBombIndex)
+
+        //if bomb hits shooter
+        if (squares[currentBombIndex].classList.contains('shooter')) {
+            squares[currentBombIndex].classList.remove('bomb')
+            // squares[currentShooterIndex].classList.add('shooter-hit')
+            // setTimeout(() => squares[currentShooterIndex].classList.remove('shooter-hit'), 250)
+            //add explosion sound
+            explosionSound = new Audio("/sound/explosion.wav");
+            explosionSound.play();
+
+            clearInterval(bombId)
+            // clearInterval(bombDrop)
+            lives--
+            livesDisplay.textContent = lives
+        }
+
+        //remove bomb when it reaches bottom
+
+        if (currentBombIndex > (squares.length - (width - 1))) {
+
+            squares[currentBombIndex].classList.remove('bomb');
+            clearInterval(bombId)
+            // clearInterval(bombDrop)
+        }
+
+    }
+    bombId = setInterval(moveBomb, 300)
+}
+
+
+
+if (lives === 0) {
+    clearInterval(bombDrop)
+}
+
+let bombDrop;
+bombDrop = setInterval(dropBomb, 5000), 1000
+//random bomb drop, from alienInvaders4 array
+// function bombDrop() {
+//     do {
+//         appleIndex = Math.floor(Math.random() * squares.length)
+//     } while (squares[appleIndex].classList.contains('snake'))
+//     squares[appleIndex].classList.add('apple')
+
+// }
