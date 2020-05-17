@@ -1,9 +1,9 @@
-//create divs in grid
 for (let i = 0; i < 255; i++) {
     var divElement = document.createElement("Div");
     document.querySelector(".grid").appendChild(divElement);
 }
 
+// const startBtn = document.querySelector(".start")
 
 const squares = document.querySelectorAll('.grid div');
 const resultDisplay = document.querySelector('#result');
@@ -12,13 +12,13 @@ const btnLeft = document.querySelector(".btn-left");
 const btnRight = document.querySelector(".btn-right");
 const shooter = document.querySelector('.shooter');
 const displayGameOver = document.querySelector("#game-over");
-const livesDisplay = document.querySelector('#lives');
+let livesDisplay = document.querySelector('#lives');
 const btnStart = document.querySelector(".start-btn");
 
 
 var shootSound;
 var boomSound;
-
+let bombDrop;
 
 
 let width = 17;
@@ -31,15 +31,11 @@ let alienInvadersTakenDown3 = [];
 let alienInvadersTakenDown4 = [];
 let intervalTime = 500
 
-lives = 4
-livesDisplay.textContent = lives;
-
 let result = 0;
 
 
 let direction = 1;
 let invaderId;
-let bombDrop;
 
 //define the alien invaders in different ranks
 let alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -94,6 +90,11 @@ function startGame() {
     clearInterval(invaderId);
     clearInterval(bombDrop);
 
+    // let laserId;
+    // clearInterval(laserId);
+    // laserId = setInterval(moveLaser, 100);
+
+
     width = 17;
     currentShooterIndex = 248;
     currentInvaderIndex = 0;
@@ -103,12 +104,12 @@ function startGame() {
     alienInvadersTakenDown3 = [];
     alienInvadersTakenDown4 = [];
     intervalTime = 500;
-    lives = 4
-    livesDisplay.textContent = lives;
-    // console.log(alienInvadersTakenDown) //is empty
-    // console.log(alienInvadersTakenDown2)
+    console.log(alienInvadersTakenDown) //is empty
+    console.log(alienInvadersTakenDown2)
     result = 0;
     direction = 1;
+    // invaderId;
+
 
     //define the alien invaders in different ranks
     alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -125,12 +126,14 @@ function startGame() {
     alienInvaders3.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader3', 'invader'));
     alienInvaders4.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader4', 'invader'));
 
+    // }
+
+
 
     // draw the shooter
     squares[currentShooterIndex].classList.add('shooter');
-
-
-    //setIntervals for moveInvaders and bombDrop
+    // squares[currentShooterIndex].classList.add('shooter');
+    // currentLaserIndex = currentShooterIndex;
     const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
     if (mediaQuery.matches) {
@@ -139,9 +142,105 @@ function startGame() {
         invaderId = setInterval(moveInvaders, intervalTime);
     }
 
-    bombDrop = setInterval(dropBomb, 5000);
+    // document.addEventListener('keyup', function () {
+    //     if (e.keyCode === 32) {
+    //         shoot();
+    //     }
+    // })
+
+
+    // document.addEventListener('keyup', function (e) {
+    //     if (e.keyCode === 32) {
+    //         document.addEventListener('keyup', shoot)
+    //     }
+    // })
+
+    // document.addEventListener('keyup', function () {
+    //     if (e.keyCode === 32) {
+    //         shoot();
+    //     }
+    // });
+
+    // const key32 = document.querySelector("data-key")
+    // document.addEventListener('keyup', shoot)
+    // btnShoot.addEventListener("click", shoot)
+
+    // switch (e.keyCode) {
+    //     case 32:
+    //         document.addEventListener('keyup', shoot)
+    //         break
+    // }
+    // document.addEventListener(KeyboardEvent.KEY_UP, shoot);
+
+
+    // if (e.keyCode === 32) {
+    //     document.addEventListener('keyup', shoot)
+    // }
+    // btnShoot.addEventListener("click", shoot)
+
+    // function spacebarShoot(e) {
+    //     if (e.keyCode === 32) {
+    //         shoot();
+    //     }
+    // }
+
+    // btnShoot.addEventListener("click", shoot);
+
+    // // window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
+    // document.addEventListener('keyup', spacebarShoot)
+
+    // function spacebarShoot() {
+    //     if (e.keyCode === 32) {
+    //         shoot();
+    //     }
+    // }
+    // if (event.keyCode == KeyboardHelper.spacebar) {
+    //     spacebarPressed = true;
+    //     shoot();
+    // }
+
+    // keyboardHelper.spacebar.addEventListener('keyup', shoot)
+
+    // document.addEventListener('keyup', function (e) {
+    //     if (e.keyCode === 32) {
+    //         shoot();
+    //     }
+    // })
 
 }
+
+// btnShoot.addEventListener("click", shoot)
+// if (e.keyCode === 32) {
+//     document.addEventListener('keyup', shoot)
+// }
+
+// function spacebarShoot(e) {
+//     if (e.keyckeyboardHelper.spacebar) {
+//         shoot();
+//     }
+// }
+
+
+// const keyboardHelper = {
+//     spacebar: 32,
+// };
+
+// if (event.keyCode == KeyboardHelper.spacebar) {
+//     spacebarPressed = true;
+// }
+
+// var KeyboardHelper = {
+//     spacebar: 32
+
+// };
+
+// var spacebarPressed = false;
+
+
+
+
+
+
 
 // ***************************************************************************
 
@@ -184,7 +283,7 @@ btnRight.addEventListener('touchstart', function () {
     squares[currentShooterIndex].classList.add('shooter');
 })
 
-// ***************************************************************************
+
 
 // move the alien invaders
 function moveInvaders() {
@@ -298,28 +397,40 @@ function moveInvaders() {
     }
 }
 
-// ***************************************************************************
+//set intervall, a little bit faster for big screen with keyboard
+// const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
-//shoot with key: 88 (x)
-function xShoot(e) {
+// if (mediaQuery.matches) {
+//     invaderId = setInterval(moveInvaders, 500), 1000;
+// } else {
+//     invaderId = setInterval(moveInvaders, 550), 1000;
+// }
+
+btnShoot.addEventListener("click", shoot);
+
+// document.addEventListener('keyup', spacebarShoot);
+
+function spacebarShoot(e) {
     if (e.keyCode === 88) {
         shoot();
     }
 }
 
-btnShoot.addEventListener("click", shoot);
-document.addEventListener('keyup', xShoot);
 
+document.addEventListener('keyup', spacebarShoot);
 
 //shoot at alien invaders
 function shoot() {
+
+
 
     let laserId;
     let currentLaserIndex = currentShooterIndex;
 
     //remove eventlisteners for shooting, so it can shoot only once at a time
+    document.removeEventListener('keyup', spacebarShoot);
     btnShoot.removeEventListener("click", shoot);
-    document.removeEventListener('keyup', xShoot);
+
 
 
     //move the laser from the shooter to the alien invader
@@ -351,12 +462,13 @@ function shoot() {
             squares[currentLaserIndex].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4');
 
             //you can shoot again
+            document.addEventListener('keyup', spacebarShoot);
+
+
             btnShoot.addEventListener("click", shoot);
-            document.addEventListener('keyup', xShoot);
-
-
             squares[currentLaserIndex].classList.add('boom');
             //add boom sound
+
             boomSound = new Audio("/sound/boom.wav");
             boomSound.play();
 
@@ -381,8 +493,9 @@ function shoot() {
         if (currentLaserIndex < width) {
             clearInterval(laserId);
             setTimeout(() => squares[currentLaserIndex].classList.remove('laser'), 100);
+            document.addEventListener('keyup', spacebarShoot);
+            // document.addEventListener('keyup', shoot);
             btnShoot.addEventListener("click", shoot);
-            document.addEventListener('keyup', xShoot);
         }
 
     }
@@ -390,9 +503,42 @@ function shoot() {
     laserId = setInterval(moveLaser, 100);
     shootSound = new Audio("/sound/shoot.wav");
     shootSound.play();
+
+
+
+    // switch (e.keyCode) {
+    //     case 32:
+    //         console.log("hello")
+    //         break
+    // }
+
+    // switch (e.keyCode) {
+    //     case 32:
+    //         laserId = setInterval(moveLaser, 100)
+    //         alert('hi')
+    //         break
+    // }
+
+    // btnShoot.addEventListener("click", function () {
+    //     laserId = setInterval(moveLaser, 100);
+    // })
 }
 
-// ***************************************************************************
+
+
+
+//press key: spacebar for shooting
+//can only shoot, when laser hit invader or reaches end of grid
+// document.addEventListener('keyup', spacebarShoot)
+
+// function spacebarShoot(e) {
+//     if (e.keyCode === 32) {
+//         shoot();
+//         btnShoot.classList.add("color-shooter");
+//         setTimeout(() => btnShoot.classList.remove("color-shooter"), 600);
+
+
+
 
 //alien invaders are dropping bombs
 function dropBomb() {
@@ -400,6 +546,7 @@ function dropBomb() {
     // let bombId
     let currentBombIndex = alienInvaders1[Math.floor(Math.random() * alienInvaders1.length)];
     squares[currentBombIndex].classList.remove('bomb');
+    // squares[currentBombIndex].classList.add('bomb')
 
     function moveBomb() {
         //move bomb
@@ -434,6 +581,7 @@ function dropBomb() {
 
 }
 
+bombDrop = setInterval(dropBomb, 5000);
 
 if (lives === 0) {
     clearInterval(bombDrop);

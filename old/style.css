@@ -11,7 +11,7 @@ body {
     background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
     font-family: 'Jost', sans-serif;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 
@@ -20,7 +20,7 @@ body {
     padding: 4vh 4vw 2vh 4vw;
     /* height: 100vh; */
     width: 75%;
-    /* height: 100vh; */
+    height: 100vh;
     border-left: 4px solid white;
     border-right: 4px solid white;
     margin: 0 auto;
