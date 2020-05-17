@@ -5,6 +5,9 @@ for (let i = 0; i < 255; i++) {
 }
 
 
+document.getElementById("si-container").volume = 0;
+
+
 const squares = document.querySelectorAll('.grid div');
 const resultDisplay = document.querySelector('#result');
 const btnShoot = document.querySelector(".btn-shoot");
@@ -15,9 +18,36 @@ const displayGameOver = document.querySelector("#game-over");
 const livesDisplay = document.querySelector('#lives');
 const btnStart = document.querySelector(".start-btn");
 
+//add audio files 
+const shootSound = new Audio("/sound/shoot.wav");
+const boomSound = new Audio("/sound/boom.wav");
+const explosionSound = new Audio("/sound/explosion.wav");
+isMute = true;
+shootSound.volume = 0;
+boomSound.volume = 0;
+explosionSound.volume = 0;
+const speaker = document.querySelector(".speaker");
+speaker.classList.add('mute');
 
-var shootSound;
-var boomSound;
+const btnMute = document.querySelector(".mute-btn");
+
+speaker.addEventListener("click", function () {
+    if (isMute) {
+        console.log('on')
+        shootSound.volume = 0.5;
+        boomSound.volume = 0.5;
+        explosionSound.volume = 0.5;
+        speaker.classList.remove('mute');
+    } else {
+        console.log("off")
+        shootSound.volume = 0;
+        boomSound.volume = 0;
+        explosionSound.volume = 0;
+        speaker.classList.add('mute');
+    }
+    isMute = !isMute;
+})
+
 
 
 
@@ -357,7 +387,7 @@ function shoot() {
 
             squares[currentLaserIndex].classList.add('boom');
             //add boom sound
-            boomSound = new Audio("/sound/boom.wav");
+            // boomSound = new Audio("/sound/boom.wav");
             boomSound.play();
 
             //remove .boom (star)
@@ -388,7 +418,7 @@ function shoot() {
     }
 
     laserId = setInterval(moveLaser, 100);
-    shootSound = new Audio("/sound/shoot.wav");
+
     shootSound.play();
 }
 
@@ -414,7 +444,6 @@ function dropBomb() {
             // squares[currentShooterIndex].classList.add('shooter-hit')
             // setTimeout(() => squares[currentShooterIndex].classList.remove('shooter-hit'), 250)
             //add explosion sound
-            explosionSound = new Audio("/sound/explosion.wav");
             explosionSound.play();
 
             clearInterval(bombId);
@@ -438,3 +467,15 @@ function dropBomb() {
 if (lives === 0) {
     clearInterval(bombDrop);
 }
+
+
+
+// function disableMute() {
+//     x.muted = false;
+// }
+
+// function checkMute() {
+//     alert(x.muted);
+// }
+
+// Try to mute all video and audio elements on the page
