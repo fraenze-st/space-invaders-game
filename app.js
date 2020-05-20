@@ -26,29 +26,8 @@ isMute = true;
 shootSound.volume = 0;
 boomSound.volume = 0;
 explosionSound.volume = 0;
-const speaker = document.querySelector(".speaker");
-speaker.classList.add('mute');
-
-const btnMute = document.querySelector(".mute-btn");
-
-speaker.addEventListener("click", function () {
-    if (isMute) {
-        console.log('on')
-        shootSound.volume = 0.5;
-        boomSound.volume = 0.5;
-        explosionSound.volume = 0.5;
-        speaker.classList.remove('mute');
-    } else {
-        console.log("off")
-        shootSound.volume = 0;
-        boomSound.volume = 0;
-        explosionSound.volume = 0;
-        speaker.classList.add('mute');
-    }
-    isMute = !isMute;
-})
-
-
+const btnVolume = document.querySelector(".volume-btn");
+const iconVolume = document.querySelector(".volume-btn i")
 
 
 let width = 17;
@@ -70,6 +49,28 @@ let result = 0;
 let direction = 1;
 let invaderId;
 let bombDrop;
+
+
+//change volume
+btnVolume.addEventListener("click", function () {
+    if (isMute) {
+        console.log('on')
+        shootSound.volume = 0.5;
+        boomSound.volume = 0.5;
+        explosionSound.volume = 0.5;
+        iconVolume.classList.remove("icon-mute");
+        iconVolume.classList.add("icon-volume");
+    } else {
+        console.log("off")
+        shootSound.volume = 0;
+        boomSound.volume = 0;
+        explosionSound.volume = 0;
+        iconVolume.classList.remove("icon-volume");
+        iconVolume.classList.add("icon-mute");
+    }
+    isMute = !isMute;
+})
+
 
 //define the alien invaders in different ranks
 let alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
