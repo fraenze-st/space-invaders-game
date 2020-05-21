@@ -469,14 +469,19 @@ if (lives === 0) {
     clearInterval(bombDrop);
 }
 
+// *************************************************************************************************
 
+// toggle plus/minus - invader scoring points
+const invaderScoringContainer = document.querySelector(".tc-invader-scoring-container");
+const iconPlus = document.querySelector(".icon-plus");
 
-// function disableMute() {
-//     x.muted = false;
-// }
+iconPlus.addEventListener("click", function () {
+    if (invaderScoringContainer.style.display === "block") {
+        invaderScoringContainer.style.display = "none";
+        iconPlus.classList.remove('icon-minus');
 
-// function checkMute() {
-//     alert(x.muted);
-// }
-
-// Try to mute all video and audio elements on the page
+    } else {
+        invaderScoringContainer.style.display = "block";
+        iconPlus.classList.add('icon-minus');
+    }
+})
