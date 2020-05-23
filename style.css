@@ -46,15 +46,12 @@ h1 {
 }
 
 .tc-right {
-    /* width: 30%; */
     color: rgb(162, 255, 56);
     font-size: 0.7rem;
     display: flex;
     flex-direction: column;
     position: relative;
     margin-left: auto;
-    /* justify-content: right; */
-
 }
 
 .tc-invader-score {
@@ -76,7 +73,7 @@ h1 {
 .grid {
     display: flex;
     flex-wrap: wrap;
-    width: 425px;
+    width: 375px;
     height: 375px;
     margin: 0 auto 1rem auto;
 }
@@ -117,6 +114,12 @@ h1 {
 .icon-mute {
     content: url(images/mute3.png);
     height: 1rem;
+}
+
+.btn-icon-plus {
+    border: 0;
+    background-color: transparent;
+    display: none;
 }
 
 .icon-plus {
@@ -182,6 +185,10 @@ h1 {
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
+.bottom-grid {
+    background-color: yellow;
+
+}
 
 .boom {
     background-color: rgb(255, 251, 21);
@@ -232,6 +239,10 @@ fa-volume-up {
 
 }
 
+.next-level-btn {
+    display: none;
+}
+
 
 
 @media (max-width: 1024px) {
@@ -263,7 +274,7 @@ fa-volume-up {
     }
 
     .grid {
-        width: 374px;
+        width: 330px;
         height: 330px;
 
         margin: 0 auto 6rem auto;
@@ -308,7 +319,8 @@ fa-volume-up {
 
     #si-container {
         /* width: 90%; */
-        margin: 4vh 4vw;
+        /* margin: 4vh 4vw; */
+        margin: 4vh auto;
         padding: 0;
     }
 
@@ -322,19 +334,20 @@ fa-volume-up {
         font-size: 1rem;
     }
 
-    .icon-plus {
-        display: block;
+    .btn-icon-plus {
+        width: 1rem;
         margin-left: auto;
         margin-right: 0.5rem;
-        width: 1rem;
+        display: flex;
+    }
+
+    .icon-plus {
+        display: block;
     }
 
     .tc-right {
-        width: 30%;
+        width: 25%;
         font-size: 0.6rem;
-        /* margin-right: 1rem; */
-        /* border: 1px solid white; */
-        padding: 0 0.5rem;
     }
 
     .tc-invader-scoring-container {
@@ -346,18 +359,16 @@ fa-volume-up {
         margin-top: 0.5rem;
     }
 
-
-
     .grid {
-        width: 272px;
-        height: 240px;
+        width: 270px;
+        height: 270px;
         margin: 0 0 4rem 0;
         /* margin: 0 auto 4rem auto; */
     }
 
     .grid div {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
     }
 
     .si-btn {
@@ -422,7 +433,7 @@ fa-volume-up {
     }
 
     .grid {
-        width: 306px;
+        width: 270px;
         height: 270px;
         margin: 0 auto 3rem auto;
     }

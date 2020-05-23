@@ -1,11 +1,8 @@
 //create divs in grid
-for (let i = 0; i < 255; i++) {
+for (let i = 0; i < 225; i++) {
     var divElement = document.createElement("Div");
     document.querySelector(".grid").appendChild(divElement);
 }
-
-
-document.getElementById("si-container").volume = 0;
 
 
 const squares = document.querySelectorAll('.grid div');
@@ -17,12 +14,12 @@ const shooter = document.querySelector('.shooter');
 const displayGameOver = document.querySelector("#game-over");
 const livesDisplay = document.querySelector('#lives');
 const btnStart = document.querySelector(".start-btn");
+const btnNextLevel = document.querySelector(".next-level-btn");
 
 //add audio files 
 const shootSound = new Audio("/sound/shoot.wav");
 const boomSound = new Audio("/sound/boom.wav");
 const explosionSound = new Audio("/sound/explosion.wav");
-isMute = true;
 shootSound.volume = 0;
 boomSound.volume = 0;
 explosionSound.volume = 0;
@@ -30,17 +27,18 @@ const btnVolume = document.querySelector(".volume-btn");
 const iconVolume = document.querySelector(".volume-btn i")
 
 
-let width = 17;
-let currentShooterIndex = 248;
+let width = 15;
+let currentShooterIndex = 218;
 let currentInvaderIndex = 0;
 let alienInvadersTakenDown = [];
 let alienInvadersTakenDown1 = [];
 let alienInvadersTakenDown2 = [];
 let alienInvadersTakenDown3 = [];
 let alienInvadersTakenDown4 = [];
-let intervalTime = 500
+let intervalTime = 750;
+let intervalBombDrop = 4000;
 
-lives = 4
+let lives = 4
 livesDisplay.textContent = lives;
 
 let result = 0;
@@ -52,6 +50,8 @@ let bombDrop;
 
 
 //change volume
+isMute = true;
+
 btnVolume.addEventListener("click", function () {
     if (isMute) {
         console.log('on')
@@ -73,16 +73,16 @@ btnVolume.addEventListener("click", function () {
 
 
 //define the alien invaders in different ranks
-let alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-let alienInvaders3 = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
-let alienInvaders2 = [34, 35, 36, 37, 38, 39, 40, 41, 42, 43];
-let alienInvaders1 = [51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
+let alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7];
+let alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22];
+let alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37];
+let alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52];
 
 
-//push the 4 diffrent alienInvaders-Arrays ind one array
+// push all alienInvaders in an array
 let alienInvaders = [];
 alienInvaders.push(...alienInvaders1, ...alienInvaders2, ...alienInvaders3, ...alienInvaders4);
-// console.log(alienInvaders)
+
 
 //draw the alien invaders
 alienInvaders1.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader1', 'invader'));
@@ -116,24 +116,19 @@ function startGame() {
         // squares[alienInvaders3[i]].classList.remove('invader3')
         squares[alienInvaders3[i]].classList.remove('invader3', 'invader');
     }
-    for (let i = 0; i <= alienInvaders4.length - 1; i++) {
-        // squares[alienInvaders4[i]].classList.remove('invader4')
-        squares[alienInvaders4[i]].classList.remove('invader4', 'invader');
-    }
     squares[currentShooterIndex].classList.remove('shooter');
 
     clearInterval(invaderId);
     clearInterval(bombDrop);
 
-    width = 17;
-    currentShooterIndex = 248;
+    width = 15;
+    currentShooterIndex = 218;
     currentInvaderIndex = 0;
     alienInvadersTakenDown = [];
     alienInvadersTakenDown1 = [];
     alienInvadersTakenDown2 = [];
     alienInvadersTakenDown3 = [];
     alienInvadersTakenDown4 = [];
-    intervalTime = 500;
     lives = 4
     livesDisplay.textContent = lives;
     // console.log(alienInvadersTakenDown) //is empty
@@ -142,10 +137,11 @@ function startGame() {
     direction = 1;
 
     //define the alien invaders in different ranks
-    alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    alienInvaders3 = [17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
-    alienInvaders2 = [34, 35, 36, 37, 38, 39, 40, 41, 42, 43];
-    alienInvaders1 = [51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
+    alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7];
+    alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22];
+    alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37];
+    alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52];
+
 
     alienInvaders = [];
     alienInvaders.push(...alienInvaders1, ...alienInvaders2, ...alienInvaders3, ...alienInvaders4);
@@ -170,7 +166,7 @@ function startGame() {
         invaderId = setInterval(moveInvaders, intervalTime);
     }
 
-    bombDrop = setInterval(dropBomb, 5000);
+    bombDrop = setInterval(dropBomb, intervalBombDrop);
 
 }
 
@@ -244,7 +240,7 @@ function moveInvaders() {
         squares[alienInvaders3[i]].classList.remove('invader3', 'invader');
     }
     for (let i = 0; i <= alienInvaders4.length - 1; i++) {
-        // squares[alienInvaders4[i]].classList.remove('invader4')
+        // squares[alienInvaders3[i]].classList.remove('invader3')
         squares[alienInvaders4[i]].classList.remove('invader4', 'invader');
     }
 
@@ -270,40 +266,38 @@ function moveInvaders() {
     //add invaders again
     for (let i = 0; i <= alienInvaders1.length - 1; i++) {
         if (!alienInvadersTakenDown1.includes(i)) {
-            // squares[alienInvaders1[i]].classList.add('invader1')
             squares[alienInvaders1[i]].classList.add('invader1', 'invader');
         }
     }
     for (let i = 0; i <= alienInvaders2.length - 1; i++) {
         if (!alienInvadersTakenDown2.includes(i)) {
-            // squares[alienInvaders2[i]].classList.add('invader2')
             squares[alienInvaders2[i]].classList.add('invader2', 'invader');
         }
     }
     for (let i = 0; i <= alienInvaders3.length - 1; i++) {
         if (!alienInvadersTakenDown3.includes(i)) {
-            // squares[alienInvaders3[i]].classList.add('invader3')
             squares[alienInvaders3[i]].classList.add('invader3', 'invader');
         }
     }
     for (let i = 0; i <= alienInvaders4.length - 1; i++) {
         if (!alienInvadersTakenDown4.includes(i)) {
-            // squares[alienInvaders4[i]].classList.add('invader4')
             squares[alienInvaders4[i]].classList.add('invader4', 'invader');
         }
     }
 
 
     // Game Over settings
+
+    //if invader hit shooter
     if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
         displayGameOver.textContent = ' - Game Over';
         squares[currentShooterIndex].classList.add('boom');
         btnShoot.removeEventListener("touchstart", shoot);
-
         clearInterval(invaderId);
         clearInterval(bombDrop);
     }
 
+    //if invaders hit bottom
     for (let i = 0; i <= alienInvaders.length - 1; i++) {
         if (alienInvaders[i] > (squares.length - (width - 1))) {
             displayGameOver.textContent = ' - Game Over';
@@ -313,7 +307,7 @@ function moveInvaders() {
         }
     }
 
-    // no lives 
+    // no lives left
     if (lives === 0) {
         displayGameOver.textContent = ' - Game Over';
         btnShoot.removeEventListener("touchstart", shoot);
@@ -321,16 +315,75 @@ function moveInvaders() {
         clearInterval(bombDrop);
     }
 
-    //you hit all alienInvaders => you win
-    if (alienInvadersTakenDown.length === alienInvaders.length) {
-        displayGameOver.textContent = ' - You Win';
-
+    // you hit all alienInvaders => next level
+    if ((alienInvadersTakenDown4.length === alienInvaders4.length) &&
+        (alienInvadersTakenDown3.length === alienInvaders3.length) &&
+        (alienInvadersTakenDown2.length === alienInvaders2.length) &&
+        (alienInvadersTakenDown1.length === alienInvaders1.length)) {
         clearInterval(invaderId);
+        clearInterval(bombDrop);
+        // starts immediately next level
+        nextLevel()
     }
 }
 
 // ***************************************************************************
 
+//moveinvaders and bombdromp get faster each level
+function nextLevel() {
+    // //remove everything which was added in level before
+
+    squares[currentShooterIndex].classList.remove('shooter');
+
+
+    clearInterval(invaderId);
+    clearInterval(bombDrop);
+
+    // width = 15;
+    currentShooterIndex = 218;
+    currentInvaderIndex = 0;
+    alienInvadersTakenDown = [];
+    alienInvadersTakenDown1 = [];
+    alienInvadersTakenDown2 = [];
+    alienInvadersTakenDown3 = [];
+    alienInvadersTakenDown4 = [];
+    livesDisplay.textContent = lives;
+    direction = 1;
+
+    //define the alien invaders in different ranks
+    alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7];
+    alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22];
+    alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37];
+    alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52];
+
+    alienInvaders = [];
+    alienInvaders.push(...alienInvaders1, ...alienInvaders2, ...alienInvaders3, ...alienInvaders4);
+
+    //draw the alien invaders
+    alienInvaders1.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader1', 'invader'));
+    alienInvaders2.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader2', 'invader'));
+    alienInvaders3.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader3', 'invader'));
+    alienInvaders4.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader4', 'invader'));
+
+
+    // draw the shooter
+    squares[currentShooterIndex].classList.add('shooter');
+
+
+    //setIntervals for moveInvaders and bombDrop
+    const mediaQuery = window.matchMedia("(min-width: 1025px)");
+
+    if (mediaQuery.matches) {
+        invaderId = setInterval(moveInvaders, (intervalTime * 0.75))
+    } else {
+        invaderId = setInterval(moveInvaders, intervalTime * 0.85);
+    }
+
+    bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.8));
+
+}
+
+// ****************************************************************************
 //shoot with key: 88 (x)
 function xShoot(e) {
     if (e.keyCode === 88) {
@@ -365,17 +418,28 @@ function shoot() {
 
             //change score, depending on rank of invader
             if (squares[currentLaserIndex].classList.contains('invader4')) {
-                result = result + 50;
+                result = result + 100;
                 resultDisplay.textContent = result;
-            } else if (squares[currentLaserIndex].classList.contains('invader3')) {
+                const alienTakenDown4 = alienInvaders4.indexOf(currentLaserIndex);
+                alienInvadersTakenDown4.push(alienTakenDown4);
+            }
+            if (squares[currentLaserIndex].classList.contains('invader3')) {
+                result = result + 70;
+                resultDisplay.textContent = result;
+                const alienTakenDown3 = alienInvaders3.indexOf(currentLaserIndex);
+                alienInvadersTakenDown3.push(alienTakenDown3);
+            }
+            if (squares[currentLaserIndex].classList.contains('invader2')) {
                 result = result + 30;
                 resultDisplay.textContent = result;
-            } else if (squares[currentLaserIndex].classList.contains('invader2')) {
-                result = result + 15;
+                const alienTakenDown2 = alienInvaders2.indexOf(currentLaserIndex);
+                alienInvadersTakenDown2.push(alienTakenDown2);
+            }
+            if (squares[currentLaserIndex].classList.contains('invader1')) {
+                result = result + 10;
                 resultDisplay.textContent = result;
-            } else if (squares[currentLaserIndex].classList.contains('invader1')) {
-                result = result + 5;
-                resultDisplay.textContent = result;
+                const alienTakenDown1 = alienInvaders1.indexOf(currentLaserIndex);
+                alienInvadersTakenDown1.push(alienTakenDown1);
             }
 
             squares[currentLaserIndex].classList.remove('laser');
@@ -388,25 +452,17 @@ function shoot() {
 
             squares[currentLaserIndex].classList.add('boom');
             //add boom sound
-            // boomSound = new Audio("/sound/boom.wav");
             boomSound.play();
 
             //remove .boom (star)
             setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250);
-
+            3
             clearInterval(laserId);
 
-            //  put hitten invaders in a variable
-            const alienTakenDown1 = alienInvaders1.indexOf(currentLaserIndex);
-            const alienTakenDown2 = alienInvaders2.indexOf(currentLaserIndex);
-            const alienTakenDown3 = alienInvaders3.indexOf(currentLaserIndex);
-            const alienTakenDown4 = alienInvaders4.indexOf(currentLaserIndex);
 
-            //and put these in an array
-            alienInvadersTakenDown4.push(alienTakenDown4);
-            alienInvadersTakenDown3.push(alienTakenDown3);
-            alienInvadersTakenDown2.push(alienTakenDown2);
-            alienInvadersTakenDown1.push(alienTakenDown1);
+            alienInvadersTakenDown.push(...alienInvadersTakenDown1, ...alienInvadersTakenDown2, ...alienInvadersTakenDown3, ...alienInvadersTakenDown4);
+            // console.log(alienInvadersTakenDown);
+            // console.log(alienInvaders);
         }
 
         if (currentLaserIndex < width) {
@@ -418,7 +474,7 @@ function shoot() {
 
     }
 
-    laserId = setInterval(moveLaser, 100);
+    laserId = setInterval(moveLaser, 75);
 
     shootSound.play();
 }
@@ -429,15 +485,14 @@ function shoot() {
 function dropBomb() {
 
     // let bombId
-    let currentBombIndex = alienInvaders1[Math.floor(Math.random() * alienInvaders1.length)];
-    squares[currentBombIndex].classList.remove('bomb');
+    let currentBombIndex = alienInvaders3[Math.floor(Math.random() * alienInvaders3.length)];
+    // squares[currentBombIndex].classList.remove('bomb');
 
     function moveBomb() {
         //move bomb
         squares[currentBombIndex].classList.remove('bomb');
         currentBombIndex += width;
         squares[currentBombIndex].classList.add('bomb');
-        // console.log(currentBombIndex)
 
         //if bomb hits shooter
         if (squares[currentBombIndex].classList.contains('shooter')) {
@@ -460,13 +515,8 @@ function dropBomb() {
         }
     }
 
-    bombId = setInterval(moveBomb, 300);
+    bombId = setInterval(moveBomb, 200);
 
-}
-
-
-if (lives === 0) {
-    clearInterval(bombDrop);
 }
 
 // *************************************************************************************************
@@ -474,8 +524,9 @@ if (lives === 0) {
 // toggle plus/minus - invader scoring points
 const invaderScoringContainer = document.querySelector(".tc-invader-scoring-container");
 const iconPlus = document.querySelector(".icon-plus");
+const btnIconPlus = document.querySelector(".btn-icon-plus");
 
-iconPlus.addEventListener("click", function () {
+btnIconPlus.addEventListener("click", function () {
     if (invaderScoringContainer.style.display === "block") {
         invaderScoringContainer.style.display = "none";
         iconPlus.classList.remove('icon-minus');
