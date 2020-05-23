@@ -174,7 +174,7 @@ function startGame() {
     if (mediaQuery.matches) {
         invaderId = setInterval(moveInvaders, intervalMoveInvaders)
     } else {
-        invaderId = setInterval(moveInvaders, intervalMoveInvaders + 200);
+        invaderId = setInterval(moveInvaders, intervalMoveInvaders + 100);
     }
 
     bombDrop = setInterval(dropBomb, intervalBombDrop);
@@ -436,7 +436,7 @@ function nextLevel() {
     if (mediaQuery.matches) {
         invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.75))
     } else {
-        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 200) * 0.85);
+        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 100) * 0.8);
     }
 
     bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.8));
