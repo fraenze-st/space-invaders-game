@@ -15,6 +15,7 @@ const displayGameOver = document.querySelector("#game-over");
 const livesDisplay = document.querySelector('#lives');
 const btnStart = document.querySelector(".start-btn");
 const btnNextLevel = document.querySelector(".next-level-btn");
+const levelDisplay = document.querySelector('#level');
 
 //add audio files 
 const shootSound = new Audio("/sound/shoot.wav");
@@ -35,11 +36,12 @@ let alienInvadersTakenDown1 = [];
 let alienInvadersTakenDown2 = [];
 let alienInvadersTakenDown3 = [];
 let alienInvadersTakenDown4 = [];
-let intervalTime = 750;
-let intervalBombDrop = 4000;
+const intervalMoveInvaders = 650;
+const intervalBombDrop = 3000;
 
 let lives = 4
 livesDisplay.textContent = lives;
+levelDisplay.textContent = 1;
 
 let result = 0;
 
@@ -116,6 +118,10 @@ function startGame() {
         // squares[alienInvaders3[i]].classList.remove('invader3')
         squares[alienInvaders3[i]].classList.remove('invader3', 'invader');
     }
+    for (let i = 0; i <= alienInvaders4.length - 1; i++) {
+        // squares[alienInvaders3[i]].classList.remove('invader3')
+        squares[alienInvaders4[i]].classList.remove('invader4', 'invader');
+    }
     squares[currentShooterIndex].classList.remove('shooter');
 
     clearInterval(invaderId);
@@ -131,9 +137,13 @@ function startGame() {
     alienInvadersTakenDown4 = [];
     lives = 4
     livesDisplay.textContent = lives;
+    level = 1
+    levelDisplay.textContent = level;
     // console.log(alienInvadersTakenDown) //is empty
     // console.log(alienInvadersTakenDown2)
     result = 0;
+    resultDisplay.textContent = result;
+    displayGameOver.textContent = '';
     direction = 1;
 
     //define the alien invaders in different ranks
@@ -141,6 +151,7 @@ function startGame() {
     alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22];
     alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37];
     alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52];
+
 
 
     alienInvaders = [];
@@ -161,13 +172,12 @@ function startGame() {
     const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
     if (mediaQuery.matches) {
-        invaderId = setInterval(moveInvaders, intervalTime)
+        invaderId = setInterval(moveInvaders, intervalMoveInvaders)
     } else {
-        invaderId = setInterval(moveInvaders, intervalTime);
+        invaderId = setInterval(moveInvaders, intervalMoveInvaders + 200);
     }
 
     bombDrop = setInterval(dropBomb, intervalBombDrop);
-
 }
 
 // ***************************************************************************
@@ -298,8 +308,55 @@ function moveInvaders() {
     }
 
     //if invaders hit bottom
-    for (let i = 0; i <= alienInvaders.length - 1; i++) {
-        if (alienInvaders[i] > (squares.length - (width - 1))) {
+    for (let i = 0; i <= alienInvaders1.length - 1; i++) {
+        if ((alienInvaders1[i] > (squares.length - (width - 1))) &&
+            (!squares[alienInvaders1[i]].classList.contains('invader'))) {
+            alienInvaders1 = [];
+        }
+        if ((alienInvaders1[i] > (squares.length - (width - 1))) &&
+            squares[alienInvaders1[i]].classList.contains('invader')) {
+            displayGameOver.textContent = ' - Game Over';
+            btnShoot.removeEventListener("touchstart", shoot);
+            clearInterval(invaderId);
+            clearInterval(bombDrop);
+        }
+    }
+
+    for (let i = 0; i <= alienInvaders2.length - 1; i++) {
+        if ((alienInvaders2[i] > (squares.length - (width - 1))) &&
+            (!squares[alienInvaders2[i]].classList.contains('invader'))) {
+            alienInvaders2 = [];
+        }
+        if ((alienInvaders2[i] > (squares.length - (width - 1))) &&
+            squares[alienInvaders2[i]].classList.contains('invader')) {
+            displayGameOver.textContent = ' - Game Over';
+            btnShoot.removeEventListener("touchstart", shoot);
+            clearInterval(invaderId);
+            clearInterval(bombDrop);
+        }
+    }
+
+    for (let i = 0; i <= alienInvaders3.length - 1; i++) {
+        if ((alienInvaders3[i] > (squares.length - (width - 1))) &&
+            (!squares[alienInvaders3[i]].classList.contains('invader'))) {
+            alienInvaders3 = [];
+        }
+        if ((alienInvaders3[i] > (squares.length - (width - 1))) &&
+            squares[alienInvaders3[i]].classList.contains('invader')) {
+            displayGameOver.textContent = ' - Game Over';
+            btnShoot.removeEventListener("touchstart", shoot);
+            clearInterval(invaderId);
+            clearInterval(bombDrop);
+        }
+    }
+
+    for (let i = 0; i <= alienInvaders4.length - 1; i++) {
+        if ((alienInvaders4[i] > (squares.length - (width - 1))) &&
+            (!squares[alienInvaders4[i]].classList.contains('invader'))) {
+            alienInvaders4 = [];
+        }
+        if ((alienInvaders4[i] > (squares.length - (width - 1))) &&
+            squares[alienInvaders4[i]].classList.contains('invader')) {
             displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
             clearInterval(invaderId);
@@ -322,6 +379,8 @@ function moveInvaders() {
         (alienInvadersTakenDown1.length === alienInvaders1.length)) {
         clearInterval(invaderId);
         clearInterval(bombDrop);
+        level++;
+        levelDisplay.textContent = level;
         // starts immediately next level
         nextLevel()
     }
@@ -340,7 +399,6 @@ function nextLevel() {
     clearInterval(bombDrop);
 
     // width = 15;
-    currentShooterIndex = 218;
     currentInvaderIndex = 0;
     alienInvadersTakenDown = [];
     alienInvadersTakenDown1 = [];
@@ -374,9 +432,9 @@ function nextLevel() {
     const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
     if (mediaQuery.matches) {
-        invaderId = setInterval(moveInvaders, (intervalTime * 0.75))
+        invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.75))
     } else {
-        invaderId = setInterval(moveInvaders, intervalTime * 0.85);
+        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 200) * 0.85);
     }
 
     bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.8));
@@ -486,7 +544,8 @@ function dropBomb() {
 
     // let bombId
     let currentBombIndex = alienInvaders3[Math.floor(Math.random() * alienInvaders3.length)];
-    // squares[currentBombIndex].classList.remove('bomb');
+    squares[currentBombIndex].classList.add('bomb');
+
 
     function moveBomb() {
         //move bomb
@@ -499,6 +558,7 @@ function dropBomb() {
             squares[currentBombIndex].classList.remove('bomb');
             // squares[currentShooterIndex].classList.add('shooter-hit')
             // setTimeout(() => squares[currentShooterIndex].classList.remove('shooter-hit'), 250)
+
             //add explosion sound
             explosionSound.play();
 
@@ -510,14 +570,17 @@ function dropBomb() {
         //remove bomb when it reaches bottom
 
         if (currentBombIndex > (squares.length - (width - 1))) {
-            setTimeout(() => squares[currentBombIndex].classList.remove('bomb'), 100);
-            clearInterval(bombId);
+            setTimeout(() => squares[currentBombIndex].classList.remove('bomb'), 70);
+            squares[currentBombIndex].classList.remove('bomb')
         }
+
     }
 
     bombId = setInterval(moveBomb, 200);
+    squares[currentBombIndex].classList.remove('bomb');
 
 }
+
 
 // *************************************************************************************************
 
