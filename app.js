@@ -303,6 +303,7 @@ function moveInvaders() {
         displayGameOver.textContent = ' - Game Over';
         squares[currentShooterIndex].classList.add('boom');
         btnShoot.removeEventListener("touchstart", shoot);
+        document.removeEventListener('keyup', xShoot);
         clearInterval(invaderId);
         clearInterval(bombDrop);
     }
@@ -317,6 +318,7 @@ function moveInvaders() {
             squares[alienInvaders1[i]].classList.contains('invader')) {
             displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
+            document.removeEventListener('keyup', xShoot);
             clearInterval(invaderId);
             clearInterval(bombDrop);
         }
@@ -331,6 +333,7 @@ function moveInvaders() {
             squares[alienInvaders2[i]].classList.contains('invader')) {
             displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
+            document.removeEventListener('keyup', xShoot);
             clearInterval(invaderId);
             clearInterval(bombDrop);
         }
@@ -345,6 +348,7 @@ function moveInvaders() {
             squares[alienInvaders3[i]].classList.contains('invader')) {
             displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
+            document.removeEventListener('keyup', xShoot);
             clearInterval(invaderId);
             clearInterval(bombDrop);
         }
@@ -359,6 +363,7 @@ function moveInvaders() {
             squares[alienInvaders4[i]].classList.contains('invader')) {
             displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
+            document.removeEventListener('keyup', xShoot);
             clearInterval(invaderId);
             clearInterval(bombDrop);
         }
@@ -368,6 +373,7 @@ function moveInvaders() {
     if (lives === 0) {
         displayGameOver.textContent = ' - Game Over';
         btnShoot.removeEventListener("touchstart", shoot);
+        document.removeEventListener('keyup', xShoot);
         clearInterval(invaderId);
         clearInterval(bombDrop);
     }
@@ -449,7 +455,7 @@ function xShoot(e) {
     }
 }
 
-btnShoot.addEventListener("click", shoot);
+btnShoot.addEventListener("touchstart", shoot);
 document.addEventListener('keyup', xShoot);
 
 
@@ -460,7 +466,7 @@ function shoot() {
     let currentLaserIndex = currentShooterIndex;
 
     //remove eventlisteners for shooting, so it can shoot only once at a time
-    btnShoot.removeEventListener("click", shoot);
+    btnShoot.removeEventListener('touchstart', shoot);
     document.removeEventListener('keyup', xShoot);
 
 
@@ -504,7 +510,7 @@ function shoot() {
             squares[currentLaserIndex].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4');
 
             //you can shoot again
-            btnShoot.addEventListener("click", shoot);
+            btnShoot.addEventListener("touchstart", shoot);
             document.addEventListener('keyup', xShoot);
 
 
@@ -526,7 +532,7 @@ function shoot() {
         if (currentLaserIndex < width) {
             clearInterval(laserId);
             setTimeout(() => squares[currentLaserIndex].classList.remove('laser'), 100);
-            btnShoot.addEventListener("click", shoot);
+            btnShoot.addEventListener("touchstart", shoot);
             document.addEventListener('keyup', xShoot);
         }
 
