@@ -166,6 +166,9 @@ function startGame() {
 
     // draw the shooter
     squares[currentShooterIndex].classList.add('shooter');
+    btnShoot.addEventListener("touchstart", shoot);
+    document.addEventListener('keyup', xShoot);
+
 
 
     //setIntervals for moveInvaders and bombDrop
@@ -468,6 +471,7 @@ function shoot() {
 
     //move the laser from the shooter to the alien invader
     function moveLaser() {
+        squares[currentLaserIndex].classList.remove('boom')
         // let laser move (by adding and removing laser)
         squares[currentLaserIndex].classList.remove('laser');
         currentLaserIndex -= width;
