@@ -346,7 +346,7 @@ fa-volume-up {
     }
 
     .tc-right {
-        width: 25%;
+        width: 30%;
         font-size: 0.6rem;
     }
 
@@ -419,8 +419,7 @@ fa-volume-up {
     }
 
     #si-container {
-        width: 100%;
-        margin: 3vh 3vw;
+        margin: 3vh auto;
     }
 
     .start-btn {
@@ -430,6 +429,10 @@ fa-volume-up {
     .tc-left h3 {
         font-weight: 600;
         font-size: 0.9rem;
+    }
+
+    .tc-right {
+        width: 35%;
     }
 
     .grid {

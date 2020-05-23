@@ -383,10 +383,6 @@ function moveInvaders() {
         (alienInvadersTakenDown3.length === alienInvaders3.length) &&
         (alienInvadersTakenDown2.length === alienInvaders2.length) &&
         (alienInvadersTakenDown1.length === alienInvaders1.length)) {
-        clearInterval(invaderId);
-        clearInterval(bombDrop);
-        level++;
-        levelDisplay.textContent = level;
         // starts immediately next level
         nextLevel()
     }
@@ -398,11 +394,11 @@ function moveInvaders() {
 function nextLevel() {
     // //remove everything which was added in level before
 
-    squares[currentShooterIndex].classList.remove('shooter');
-
-
     clearInterval(invaderId);
     clearInterval(bombDrop);
+    level++;
+    levelDisplay.textContent = level;
+
 
     // width = 15;
     currentInvaderIndex = 0;
