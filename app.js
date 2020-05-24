@@ -4,7 +4,7 @@ for (let i = 0; i < 225; i++) {
     document.querySelector(".grid").appendChild(divElement);
 }
 
-
+const grid = document.querySelector('.grid');
 const squares = document.querySelectorAll('.grid div');
 const resultDisplay = document.querySelector('#result');
 const btnShoot = document.querySelector(".btn-shoot");
@@ -14,8 +14,10 @@ const shooter = document.querySelector('.shooter');
 const displayGameOver = document.querySelector("#game-over");
 const livesDisplay = document.querySelector('#lives');
 const btnStart = document.querySelector(".start-btn");
-const btnNextLevel = document.querySelector(".next-level-btn");
-const levelDisplay = document.querySelector('#level');
+const containerNextLevel = document.querySelector(".next-level-container");
+const btnNextLevel = document.querySelector(".btn-next-level");
+const levelDisplay = document.querySelector('.level');
+
 
 //add audio files 
 const shootSound = new Audio("/sound/shoot.wav");
@@ -36,7 +38,7 @@ let alienInvadersTakenDown1 = [];
 let alienInvadersTakenDown2 = [];
 let alienInvadersTakenDown3 = [];
 let alienInvadersTakenDown4 = [];
-const intervalMoveInvaders = 650;
+const intervalMoveInvaders = 700;
 const intervalBombDrop = 3000;
 
 let lives = 4
@@ -102,7 +104,6 @@ btnStart.addEventListener("click", startGame)
 
 // start game
 function startGame() {
-
 
     // //remove everything which was added in game before
     //remove Invaders
@@ -311,19 +312,13 @@ function moveInvaders() {
         clearInterval(bombDrop);
     }
 
-    //if invaders hit bottom
+
+    // if invaders hit bottom
+
     for (let i = 0; i <= alienInvaders1.length - 1; i++) {
         if ((alienInvaders1[i] > (squares.length - (width - 1))) &&
             (!squares[alienInvaders1[i]].classList.contains('invader'))) {
             alienInvaders1 = [];
-        }
-        if ((alienInvaders1[i] > (squares.length - (width - 1))) &&
-            squares[alienInvaders1[i]].classList.contains('invader')) {
-            displayGameOver.textContent = ' - Game Over';
-            btnShoot.removeEventListener("touchstart", shoot);
-            document.removeEventListener('keyup', xShoot);
-            clearInterval(invaderId);
-            clearInterval(bombDrop);
         }
     }
 
@@ -332,28 +327,12 @@ function moveInvaders() {
             (!squares[alienInvaders2[i]].classList.contains('invader'))) {
             alienInvaders2 = [];
         }
-        if ((alienInvaders2[i] > (squares.length - (width - 1))) &&
-            squares[alienInvaders2[i]].classList.contains('invader')) {
-            displayGameOver.textContent = ' - Game Over';
-            btnShoot.removeEventListener("touchstart", shoot);
-            document.removeEventListener('keyup', xShoot);
-            clearInterval(invaderId);
-            clearInterval(bombDrop);
-        }
     }
 
     for (let i = 0; i <= alienInvaders3.length - 1; i++) {
         if ((alienInvaders3[i] > (squares.length - (width - 1))) &&
             (!squares[alienInvaders3[i]].classList.contains('invader'))) {
             alienInvaders3 = [];
-        }
-        if ((alienInvaders3[i] > (squares.length - (width - 1))) &&
-            squares[alienInvaders3[i]].classList.contains('invader')) {
-            displayGameOver.textContent = ' - Game Over';
-            btnShoot.removeEventListener("touchstart", shoot);
-            document.removeEventListener('keyup', xShoot);
-            clearInterval(invaderId);
-            clearInterval(bombDrop);
         }
     }
 
@@ -362,15 +341,20 @@ function moveInvaders() {
             (!squares[alienInvaders4[i]].classList.contains('invader'))) {
             alienInvaders4 = [];
         }
-        if ((alienInvaders4[i] > (squares.length - (width - 1))) &&
-            squares[alienInvaders4[i]].classList.contains('invader')) {
+    }
+
+
+    for (let i = 211; i <= squares.length - 1; i++) {
+        if (squares[i].classList.contains('invader')) {
             displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
             document.removeEventListener('keyup', xShoot);
+            squares[i].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4');
             clearInterval(invaderId);
             clearInterval(bombDrop);
         }
     }
+
 
     // no lives left
     if (lives === 0) {
@@ -386,17 +370,27 @@ function moveInvaders() {
         (alienInvadersTakenDown3.length === alienInvaders3.length) &&
         (alienInvadersTakenDown2.length === alienInvaders2.length) &&
         (alienInvadersTakenDown1.length === alienInvaders1.length)) {
-        // starts immediately next level
-        nextLevel()
+        displayGameOver.textContent = ' - Level gewonnen';
+        clearInterval(invaderId);
+        clearInterval(bombDrop);
+        grid.style.display = "none"
+        containerNextLevel.style.display = "flex";
+        btnNextLevel.addEventListener('click', nextLevel);
+        // display block button for next level
     }
+
 }
+
+
 
 // ***************************************************************************
 
 //moveinvaders and bombdromp get faster each level
 function nextLevel() {
     // //remove everything which was added in level before
-
+    grid.style.display = "flex"
+    containerNextLevel.style.display = "none";
+    displayGameOver.textContent = '';
     clearInterval(invaderId);
     clearInterval(bombDrop);
     level++;
@@ -437,14 +431,16 @@ function nextLevel() {
     const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
     if (mediaQuery.matches) {
-        invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.75))
+        invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.8))
     } else {
-        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 100) * 0.8);
+        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 50) * 0.8);
     }
 
-    bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.8));
+    bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.85));
 
 }
+
+btnNextLevel.addEventListener('click', nextLevel);
 
 // ****************************************************************************
 //shoot with key: 88 (x)
@@ -492,6 +488,7 @@ function shoot() {
                 resultDisplay.textContent = result;
                 const alienTakenDown3 = alienInvaders3.indexOf(currentLaserIndex);
                 alienInvadersTakenDown3.push(alienTakenDown3);
+
             }
             if (squares[currentLaserIndex].classList.contains('invader2')) {
                 result = result + 30;
@@ -520,10 +517,7 @@ function shoot() {
 
             //remove .boom (star)
             setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250);
-            3
             clearInterval(laserId);
-
-
             alienInvadersTakenDown.push(...alienInvadersTakenDown1, ...alienInvadersTakenDown2, ...alienInvadersTakenDown3, ...alienInvadersTakenDown4);
             // console.log(alienInvadersTakenDown);
             // console.log(alienInvaders);
@@ -550,10 +544,11 @@ function dropBomb() {
 
     // let bombId
     let currentBombIndex = alienInvaders3[Math.floor(Math.random() * alienInvaders3.length)];
-    squares[currentBombIndex].classList.add('bomb');
+
 
 
     function moveBomb() {
+
         //move bomb
         squares[currentBombIndex].classList.remove('bomb');
         currentBombIndex += width;
@@ -567,7 +562,6 @@ function dropBomb() {
 
             //add explosion sound
             explosionSound.play();
-
             clearInterval(bombId);
             lives--;
             livesDisplay.textContent = lives;
@@ -576,14 +570,14 @@ function dropBomb() {
         //remove bomb when it reaches bottom
 
         if (currentBombIndex > (squares.length - (width - 1))) {
+            clearInterval(bombId);
             setTimeout(() => squares[currentBombIndex].classList.remove('bomb'), 70);
-            squares[currentBombIndex].classList.remove('bomb')
         }
 
     }
 
     bombId = setInterval(moveBomb, 200);
-    squares[currentBombIndex].classList.remove('bomb');
+    // squares[currentBombIndex].classList.remove('bomb');
 
 }
 
