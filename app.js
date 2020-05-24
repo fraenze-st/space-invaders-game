@@ -366,17 +366,13 @@ function moveInvaders() {
     }
 
     // you hit all alienInvaders => next level
-    if ((alienInvadersTakenDown4.length === alienInvaders4.length) &&
-        (alienInvadersTakenDown3.length === alienInvaders3.length) &&
-        (alienInvadersTakenDown2.length === alienInvaders2.length) &&
-        (alienInvadersTakenDown1.length === alienInvaders1.length)) {
+    if (alienInvadersTakenDown.length === alienInvaders.length) {
         displayGameOver.textContent = ' - Level gewonnen';
         clearInterval(invaderId);
         clearInterval(bombDrop);
         grid.style.display = "none"
         containerNextLevel.style.display = "flex";
         btnNextLevel.addEventListener('click', nextLevel);
-        // display block button for next level
     }
 
 }
@@ -482,12 +478,14 @@ function shoot() {
                 resultDisplay.textContent = result;
                 const alienTakenDown4 = alienInvaders4.indexOf(currentLaserIndex);
                 alienInvadersTakenDown4.push(alienTakenDown4);
+                alienInvadersTakenDown.push(alienInvadersTakenDown4);
             }
             if (squares[currentLaserIndex].classList.contains('invader3')) {
                 result = result + 70;
                 resultDisplay.textContent = result;
                 const alienTakenDown3 = alienInvaders3.indexOf(currentLaserIndex);
                 alienInvadersTakenDown3.push(alienTakenDown3);
+                alienInvadersTakenDown.push(alienInvadersTakenDown3);
 
             }
             if (squares[currentLaserIndex].classList.contains('invader2')) {
@@ -495,12 +493,14 @@ function shoot() {
                 resultDisplay.textContent = result;
                 const alienTakenDown2 = alienInvaders2.indexOf(currentLaserIndex);
                 alienInvadersTakenDown2.push(alienTakenDown2);
+                alienInvadersTakenDown.push(alienInvadersTakenDown2);
             }
             if (squares[currentLaserIndex].classList.contains('invader1')) {
                 result = result + 10;
                 resultDisplay.textContent = result;
                 const alienTakenDown1 = alienInvaders1.indexOf(currentLaserIndex);
                 alienInvadersTakenDown1.push(alienTakenDown1);
+                alienInvadersTakenDown.push(alienInvadersTakenDown1);
             }
 
             squares[currentLaserIndex].classList.remove('laser');
@@ -518,7 +518,7 @@ function shoot() {
             //remove .boom (star)
             setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250);
             clearInterval(laserId);
-            alienInvadersTakenDown.push(...alienInvadersTakenDown1, ...alienInvadersTakenDown2, ...alienInvadersTakenDown3, ...alienInvadersTakenDown4);
+            // alienInvadersTakenDown.push(...alienInvadersTakenDown1, ...alienInvadersTakenDown2, ...alienInvadersTakenDown3, ...alienInvadersTakenDown4);
             // console.log(alienInvadersTakenDown);
             // console.log(alienInvaders);
         }
