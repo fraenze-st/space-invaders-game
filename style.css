@@ -93,12 +93,83 @@ h1 {
     justify-content: center;
     width: 375px;
     height: 375px;
+    animation: fadeIn ease 1.5s;
+    -webkit-animation: fadeIn ease 1.5s;
+    -moz-animation: fadeIn ease 1.5s;
+    -o-animation: fadeIn ease 1.5s;
+    -ms-animation: fadeIn ease 1.5s;
 }
 
+/* animation fadein */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
 .next-level-container .btn-next-level {
-    /* margin-top: 85px; */
+    display: none;
     margin-top: calc(375px/4.4);
     background: rgb(29, 29, 29, 0.7);
+    color: rgb(251, 96, 238);
+    border-color: rgb(251, 92, 238);
+    z-index: 10;
+}
+
+.next-level-container #game-over {
+    display: none;
+    margin-top: calc(375px/4.4);
+    text-align: center;
+    padding: 0.3rem;
+    font-size: 1.4rem;
+    width: 9rem;
+    height: 2rem;
+    background: rgb(29, 29, 29, 0.9);
     color: rgb(251, 96, 238);
     border-color: rgb(251, 92, 238);
     z-index: 10;
@@ -108,7 +179,7 @@ h1 {
     position: absolute;
     width: 375px;
     height: 375px;
-    background-color: rgba(39, 255, 86, 0.2);
+    /* background-color: rgba(39, 255, 190, 0.25); */
     background-color: rgba(41, 225, 241, 0.25);
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
@@ -259,16 +330,6 @@ h1 {
     /* background-color: rgb(213, 255, 249); */
 }
 
-/* .button {
-    width: 3rem;
-    background-color: tomato;
-}
-
-fa-volume-up {
-    background-color: yellow;
-
-} */
-
 
 
 
@@ -318,8 +379,16 @@ fa-volume-up {
     }
 
     .next-level-container .btn-next-level {
-        /* margin-top: 85px; */
+        /* margin-top:5 85px; */
         margin-top: calc(330px/4.4);
+    }
+
+    .next-level-container #game-over {
+        margin-top: calc(330px/4.4);
+        padding: 0.35rem;
+        font-size: 1.3rem;
+        width: 8rem;
+        height: 1.8rem;
     }
 
     .big-invader {
@@ -328,7 +397,6 @@ fa-volume-up {
     }
 
     .si-btn {
-
         font-weight: bold;
         border: 0.2rem solid rgb(131, 255, 238);
         padding: 0.2rem 0.5rem;
@@ -422,6 +490,15 @@ fa-volume-up {
         margin-top: calc(300px/4.4);
     }
 
+
+    .next-level-container #game-over {
+        margin-top: calc(300px/4.4);
+        padding: 0.3rem;
+        font-size: 1.1rem;
+        width: 7rem;
+        height: 1.8rem;
+    }
+
     .big-invader {
         width: 300px;
         height: 300px;
@@ -509,6 +586,14 @@ fa-volume-up {
 
     .next-level-container .btn-next-level {
         margin-top: calc(270px/4.4);
+    }
+
+    .next-level-container #game-over {
+        margin-top: calc(270px/4.4);
+        padding: 0.35rem;
+        font-size: 1rem;
+        width: 6rem;
+        height: 1.5rem;
     }
 
     .big-invader {

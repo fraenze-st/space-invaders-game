@@ -11,7 +11,7 @@ const btnShoot = document.querySelector(".btn-shoot");
 const btnLeft = document.querySelector(".btn-left");
 const btnRight = document.querySelector(".btn-right");
 const shooter = document.querySelector('.shooter');
-const displayGameOver = document.querySelector("#game-over");
+const displayGameOver = document.querySelector(".next-level-container #game-over");
 const livesDisplay = document.querySelector('#lives');
 const btnStart = document.querySelector(".start-btn");
 const containerNextLevel = document.querySelector(".next-level-container");
@@ -106,6 +106,11 @@ btnStart.addEventListener("click", startGame)
 function startGame() {
 
     // //remove everything which was added in game before
+    grid.style.display = "flex"
+    containerNextLevel.style.display = "none";
+    btnNextLevel.style.display = "none";
+    displayGameOver.style.display = "none";
+    displayGameOver.textContent = '';
     //remove Invaders
     for (let i = 0; i <= alienInvaders1.length - 1; i++) {
         // squares[alienInvaders1[i]].classList.remove('invader1')
@@ -304,12 +309,16 @@ function moveInvaders() {
 
     //if invader hit shooter
     if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
-        displayGameOver.textContent = ' - Game Over';
+        // displayGameOver.textContent = ' - Game Over';
         squares[currentShooterIndex].classList.add('boom');
         btnShoot.removeEventListener("touchstart", shoot);
         document.removeEventListener('keyup', xShoot);
         clearInterval(invaderId);
         clearInterval(bombDrop);
+        setTimeout(() => grid.style.display = "none", 500);
+        setTimeout(() => containerNextLevel.style.display = "flex", 500);
+        displayGameOver.style.display = "block";
+        displayGameOver.textContent = "Game Over";
     }
 
 
@@ -346,38 +355,41 @@ function moveInvaders() {
 
     for (let i = 211; i <= squares.length - 1; i++) {
         if (squares[i].classList.contains('invader')) {
-            displayGameOver.textContent = ' - Game Over';
             btnShoot.removeEventListener("touchstart", shoot);
             document.removeEventListener('keyup', xShoot);
             squares[i].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4');
             clearInterval(invaderId);
             clearInterval(bombDrop);
+            setTimeout(() => grid.style.display = "none", 500);
+            setTimeout(() => containerNextLevel.style.display = "flex", 500);;
+            displayGameOver.style.display = "block";
+            displayGameOver.textContent = "Game Over";
         }
     }
 
 
     // no lives left
     if (lives === 0) {
-        displayGameOver.textContent = ' - Game Over';
-        btnShoot.removeEventListener("touchstart", shoot);
-        document.removeEventListener('keyup', xShoot);
         clearInterval(invaderId);
         clearInterval(bombDrop);
+        setTimeout(() => grid.style.display = "none", 500);
+        setTimeout(() => containerNextLevel.style.display = "flex", 500);
+        displayGameOver.style.display = "block";
+        displayGameOver.textContent = "Game Over";
     }
 
     // you hit all alienInvaders => next level
     if (alienInvadersTakenDown.length === alienInvaders.length) {
-        displayGameOver.textContent = ' - Level gewonnen';
         clearInterval(invaderId);
         clearInterval(bombDrop);
-        grid.style.display = "none"
-        containerNextLevel.style.display = "flex";
+        setTimeout(() => grid.style.display = "none", 500);
+        setTimeout(() => containerNextLevel.style.display = "flex", 500);
+        btnNextLevel.style.display = "block";
+        btnStart.removeEventListener('click', startGame);
         btnNextLevel.addEventListener('click', nextLevel);
     }
 
 }
-
-
 
 // ***************************************************************************
 
@@ -386,11 +398,12 @@ function nextLevel() {
     // //remove everything which was added in level before
     grid.style.display = "flex"
     containerNextLevel.style.display = "none";
-    displayGameOver.textContent = '';
+    btnNextLevel.style.display = "none";
     clearInterval(invaderId);
     clearInterval(bombDrop);
     level++;
     levelDisplay.textContent = level;
+    btnStart.addEventListener('click', startGame);
 
 
     // width = 15;
@@ -543,6 +556,8 @@ function shoot() {
 function dropBomb() {
 
     // let bombId
+    bombId = setInterval(moveBomb, 200);
+
     let currentBombIndex = alienInvaders3[Math.floor(Math.random() * alienInvaders3.length)];
 
 
@@ -568,17 +583,14 @@ function dropBomb() {
         }
 
         //remove bomb when it reaches bottom
-
         if (currentBombIndex > (squares.length - (width - 1))) {
             clearInterval(bombId);
             setTimeout(() => squares[currentBombIndex].classList.remove('bomb'), 70);
         }
-
     }
 
-    bombId = setInterval(moveBomb, 200);
-    // squares[currentBombIndex].classList.remove('bomb');
-
+    // clearInterval(bombId);
+    squares[currentBombIndex].classList.remove('bomb');
 }
 
 
