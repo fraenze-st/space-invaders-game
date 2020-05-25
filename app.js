@@ -426,7 +426,7 @@ function nextLevel() {
     //every level faster
     for (let i = 0; i <= levelArray.length - 1; i++) {
         intervalMoveInvaders = intervalMoveInvaders * 0.87;
-        intervalBombDrop = intervalBombDrop * 0.85;
+        intervalBombDrop = intervalBombDrop * 0.98;
     }
 
     //setIntervals for moveInvaders and bombDrop
