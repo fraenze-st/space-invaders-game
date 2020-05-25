@@ -16,7 +16,7 @@ body {
     box-sizing: border-box;
     background-color: rgb(2, 29, 148);
     /* Photo by Nasa on Unsplash */
-    background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
+    background: url(/images/nasa-tall.jpg);
     background-size: cover;
     font-family: 'Jost', sans-serif;
     height: 100vh;
@@ -333,8 +333,8 @@ h1 {
 
     body {
         /* Photo by Nasa on Unsplash */
-        background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
-        background-size: cover;
+        background: url(/images/nasa-medium.jpg);
+        background-size: stretch;
     }
 
     h1 {

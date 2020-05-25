@@ -164,11 +164,11 @@ function startGame() {
     const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
     if (mediaQuery.matches) {
-        invaderId = setInterval(moveInvaders, intervalMoveInvaders)
+        invaderId = setInterval(moveInvaders, intervalMoveInvaders * 0.8)
     } else {
-        invaderId = setInterval(moveInvaders, intervalMoveInvaders + 100);
+        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 50) * 0.8);
     }
-
+    // invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.8));
     bombDrop = setInterval(dropBomb, intervalBombDrop);
 }
 
