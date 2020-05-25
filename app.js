@@ -17,6 +17,7 @@ const btnStart = document.querySelector(".start-btn");
 const containerNextLevel = document.querySelector(".next-level-container");
 const btnNextLevel = document.querySelector(".btn-next-level");
 const levelDisplay = document.querySelector('.level');
+const levelArray = [];
 
 
 //add audio files 
@@ -38,8 +39,8 @@ let alienInvadersTakenDown1 = [];
 let alienInvadersTakenDown2 = [];
 let alienInvadersTakenDown3 = [];
 let alienInvadersTakenDown4 = [];
-const intervalMoveInvaders = 700;
-const intervalBombDrop = 3000;
+let intervalMoveInvaders = 700;
+let intervalBombDrop = 3000;
 
 let lives = 4
 livesDisplay.textContent = lives;
@@ -139,6 +140,8 @@ function startGame() {
     resultDisplay.textContent = result;
     displayGameOver.textContent = '';
     direction = 1;
+    intervalMoveInvaders = 700
+    intervalBombDrop = 3000;
 
     //define the alien invaders in different ranks
     alienInvaders4 = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -385,6 +388,9 @@ function nextLevel() {
     clearInterval(bombDrop);
     level++;
     levelDisplay.textContent = level;
+    levelArray.push(level);
+    console.log(levelArray);
+
     btnStart.addEventListener('click', startGame);
 
 
@@ -417,13 +423,19 @@ function nextLevel() {
     // draw the shooter
     squares[currentShooterIndex].classList.add('shooter');
 
+    //every level faster
+    for (let i = 0; i <= levelArray.length - 1; i++) {
+        intervalMoveInvaders = intervalMoveInvaders * 0.87;
+        intervalBombDrop = intervalBombDrop * 0.85;
+    }
 
     //setIntervals for moveInvaders and bombDrop
-    invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.75))
-    bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.85));
+    invaderId = setInterval(moveInvaders, intervalMoveInvaders);
+    bombDrop = setInterval(dropBomb, intervalBombDrop);
+
+    btnNextLevel.addEventListener('click', nextLevel);
 }
 
-btnNextLevel.addEventListener('click', nextLevel);
 
 // ****************************************************************************
 //shoot with key: 88 (x)
