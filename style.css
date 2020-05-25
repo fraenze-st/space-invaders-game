@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -5,15 +12,15 @@
 }
 
 body {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    /* Photo by Nasa on Unsplash */
     background-color: rgb(2, 29, 148);
+    /* Photo by Nasa on Unsplash */
     background: url(/images/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
     font-family: 'Jost', sans-serif;
     height: 100vh;
 }
-
 
 #si-container {
 
@@ -25,7 +32,6 @@ body {
 }
 
 
-
 h1 {
     text-align: center;
     font-size: 2.7rem;
@@ -35,12 +41,18 @@ h1 {
     letter-spacing: 0.9rem;
     text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     font-family: 'Oswald', sans-serif;
-
 }
 
 .top-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     margin: 1.5rem 0;
 }
@@ -48,13 +60,20 @@ h1 {
 .tc-right {
     color: rgb(162, 255, 56);
     font-size: 0.7rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     position: relative;
     margin-left: auto;
 }
 
 .tc-invader-score {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
 }
 
@@ -71,9 +90,11 @@ h1 {
 }
 
 
-
 .grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     width: 375px;
     height: 375px;
@@ -89,7 +110,8 @@ h1 {
     display: none;
     position: relative;
     margin: 0 auto 1rem auto;
-    /* align-items: center; */
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     width: 375px;
     height: 375px;
@@ -111,37 +133,7 @@ h1 {
     }
 }
 
-@-moz-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 @-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-o-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-ms-keyframes fadeIn {
     0% {
         opacity: 0;
     }
@@ -169,7 +161,7 @@ h1 {
     font-size: 1.4rem;
     width: 9rem;
     height: 2rem;
-    background: rgb(29, 29, 29, 0.9);
+    background: rgba(19, 19, 19);
     color: rgb(251, 96, 238);
     border-color: rgb(251, 92, 238);
     z-index: 10;
@@ -181,6 +173,7 @@ h1 {
     height: 375px;
     /* background-color: rgba(39, 255, 190, 0.25); */
     background-color: rgba(41, 225, 241, 0.25);
+    -webkit-clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
@@ -235,7 +228,11 @@ h1 {
 }
 
 .btn-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
@@ -263,50 +260,49 @@ h1 {
 
 
 .invader {
+    -webkit-clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
     clip-path: polygon(40% 0, 64% 0, 90% 15%, 68% 41%, 88% 77%, 53% 56%, 16% 77%, 37% 42%, 12% 15%);
 }
 
 .invader1 {
     background-color: rgb(20, 214, 182);
+    -webkit-clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 .invader2 {
     background-color: rgb(255, 106, 243);
+    -webkit-clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 .invader3 {
     background-color: rgb(67, 251, 107);
+    -webkit-clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
 }
 
 .invader4 {
     background-color: rgb(200, 123, 251);
+    -webkit-clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
     clip-path: polygon(52% 9%, 92% 23%, 65% 49%, 93% 94%, 56% 67%, 45% 67%, 7% 93%, 38% 48%, 11% 23%);
-}
-
-.bottom-grid {
-    background-color: yellow;
-
 }
 
 .boom {
     background-color: rgb(255, 251, 21);
+    -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    /* clip-path: polygon(48% 44%, 85% 0, 56% 48%, 100% 70%, 55% 56%, 63% 100%, 44% 54%, 0 80%, 40% 49%, 1% 0); */
 }
 
 .laser {
-    clip-path: polygon(46% 1%, 56% 0, 67% 100%, 30% 100%);
-    clip-path: polygon(48% 0, 54% 0, 65% 100%, 40% 100%);
     background-color: orange;
+    -webkit-clip-path: polygon(48% 0, 54% 0, 65% 100%, 40% 100%);
+    clip-path: polygon(48% 0, 54% 0, 65% 100%, 40% 100%);
 }
 
 .bomb {
     background-color: rgb(255, 43, 43);
-    clip-path: polygon(49% 23%, 66% 37%, 65% 62%, 49% 72%, 32% 61%, 31% 37%);
-    clip-path: polygon(49% 28%, 63% 36%, 64% 59%, 50% 66%, 34% 60%, 34% 36%);
+    -webkit-clip-path: polygon(48% 26%, 66% 35%, 66% 70%, 49% 76%, 31% 69%, 31% 35%);
     clip-path: polygon(48% 26%, 66% 35%, 66% 70%, 49% 76%, 31% 69%, 31% 35%);
 
 }
@@ -448,6 +444,8 @@ h1 {
         width: 1rem;
         margin-left: auto;
         margin-right: 0.5rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
 
@@ -529,7 +527,11 @@ h1 {
     }
 
     .btn-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
         justify-content: space-between;
         padding-right: 1rem;
     }
