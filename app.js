@@ -98,6 +98,7 @@ alienInvaders4.forEach(invader => squares[currentInvaderIndex + invader].classLi
 // draw the shooter
 squares[currentShooterIndex].classList.add('shooter');
 
+
 // ***************************************************************************
 btnStart.addEventListener("click", startGame)
 
@@ -161,13 +162,15 @@ function startGame() {
     document.addEventListener('keyup', xShoot);
 
     //setIntervals for moveInvaders and bombDrop
-    const mediaQuery = window.matchMedia("(min-width: 1025px)");
+    // const mediaQuery = window.matchMedia("(min-width: 1025px)");
 
-    if (mediaQuery.matches) {
-        invaderId = setInterval(moveInvaders, intervalMoveInvaders * 0.8)
-    } else {
-        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 50) * 0.8);
-    }
+    // if (mediaQuery.matches) {
+    //     invaderId = setInterval(moveInvaders, intervalMoveInvaders)
+    // } else {
+    //     invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 50));
+    // }
+    invaderId = setInterval(moveInvaders, intervalMoveInvaders)
+
     // invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.8));
     bombDrop = setInterval(dropBomb, intervalBombDrop);
 }
@@ -416,16 +419,8 @@ function nextLevel() {
 
 
     //setIntervals for moveInvaders and bombDrop
-    const mediaQuery = window.matchMedia("(min-width: 1025px)");
-
-    if (mediaQuery.matches) {
-        invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.8))
-    } else {
-        invaderId = setInterval(moveInvaders, (intervalMoveInvaders + 50) * 0.8);
-    }
-
+    invaderId = setInterval(moveInvaders, (intervalMoveInvaders * 0.75))
     bombDrop = setInterval(dropBomb, (intervalBombDrop * 0.85));
-
 }
 
 btnNextLevel.addEventListener('click', nextLevel);

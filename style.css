@@ -19,11 +19,11 @@ body {
     background: url(/images/nasa-tall.jpg);
     background-size: cover;
     font-family: 'Jost', sans-serif;
-    height: 100vh;
+    height: 100%;
 }
 
 #si-container {
-
+    height: 100vh;
     padding: 2vh 4vw 2vh 4vw;
     width: 75%;
     border-left: 4px solid white;
@@ -36,7 +36,7 @@ h1 {
     text-align: center;
     font-size: 2.7rem;
     color: white;
-    margin-bottom: 1rem;
+    margin-bottom: 4vh;
     font-weight: 700;
     letter-spacing: 0.9rem;
     text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
@@ -54,7 +54,7 @@ h1 {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    margin: 1.5rem 0;
+    margin: 3vh 0;
 }
 
 .tc-right {
@@ -98,7 +98,7 @@ h1 {
     flex-wrap: wrap;
     width: 375px;
     height: 375px;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto 2vh auto;
 }
 
 .grid div {
@@ -109,7 +109,7 @@ h1 {
 .next-level-container {
     display: none;
     position: relative;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto 2vh auto;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -247,7 +247,7 @@ h1 {
 
 /* note for use of keyboard and buttons */
 .note {
-    margin: 3rem 0 0 0;
+    margin: 5vh 0 0 0;
     color: rgb(162, 163, 163);
     font-weight: 600;
     font-size: 0.8rem;
@@ -360,7 +360,6 @@ h1 {
     .grid {
         width: 330px;
         height: 330px;
-
         margin: 0 auto 6rem auto;
     }
 
@@ -372,6 +371,7 @@ h1 {
     .next-level-container {
         width: 330px;
         height: 330px;
+        margin: 0 auto 6rem auto;
     }
 
     .next-level-container .btn-next-level {
@@ -482,6 +482,7 @@ h1 {
     .next-level-container {
         width: 300px;
         height: 300px;
+        margin: 0 0 4rem 0;
     }
 
     .next-level-container .btn-next-level {
@@ -584,6 +585,7 @@ h1 {
     .next-level-container {
         width: 270px;
         height: 270px;
+        margin: 0 auto 3rem auto;
     }
 
     .next-level-container .btn-next-level {
