@@ -111,23 +111,12 @@ function startGame() {
     btnNextLevel.style.display = "none";
     displayGameOver.style.display = "none";
     displayGameOver.textContent = '';
-    //remove Invaders
-    for (let i = 0; i <= alienInvaders1.length - 1; i++) {
-        // squares[alienInvaders1[i]].classList.remove('invader1')
-        squares[alienInvaders1[i]].classList.remove('invader1', 'invader');
+
+    //remove invaders and boom (star)
+    for (let i = 0; i <= squares.length - 1; i++) {
+        squares[i].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4', 'boom');
     }
-    for (let i = 0; i <= alienInvaders2.length - 1; i++) {
-        // squares[alienInvaders2[i]].classList.remove('invader2')
-        squares[alienInvaders2[i]].classList.remove('invader2', 'invader');
-    }
-    for (let i = 0; i <= alienInvaders3.length - 1; i++) {
-        // squares[alienInvaders3[i]].classList.remove('invader3')
-        squares[alienInvaders3[i]].classList.remove('invader3', 'invader');
-    }
-    for (let i = 0; i <= alienInvaders4.length - 1; i++) {
-        // squares[alienInvaders3[i]].classList.remove('invader3')
-        squares[alienInvaders4[i]].classList.remove('invader4', 'invader');
-    }
+    //remove shooter
     squares[currentShooterIndex].classList.remove('shooter');
 
     clearInterval(invaderId);
@@ -145,8 +134,6 @@ function startGame() {
     livesDisplay.textContent = lives;
     level = 1
     levelDisplay.textContent = level;
-    // console.log(alienInvadersTakenDown) //is empty
-    // console.log(alienInvadersTakenDown2)
     result = 0;
     resultDisplay.textContent = result;
     displayGameOver.textContent = '';
@@ -157,8 +144,6 @@ function startGame() {
     alienInvaders3 = [15, 16, 17, 18, 19, 20, 21, 22];
     alienInvaders2 = [30, 31, 32, 33, 34, 35, 36, 37];
     alienInvaders1 = [45, 46, 47, 48, 49, 50, 51, 52];
-
-
 
     alienInvaders = [];
     alienInvaders.push(...alienInvaders1, ...alienInvaders2, ...alienInvaders3, ...alienInvaders4);
@@ -174,8 +159,6 @@ function startGame() {
     squares[currentShooterIndex].classList.add('shooter');
     btnShoot.addEventListener("touchstart", shoot);
     document.addEventListener('keyup', xShoot);
-
-
 
     //setIntervals for moveInvaders and bombDrop
     const mediaQuery = window.matchMedia("(min-width: 1025px)");
@@ -309,10 +292,8 @@ function moveInvaders() {
 
     //if invader hit shooter
     if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
-        // displayGameOver.textContent = ' - Game Over';
         squares[currentShooterIndex].classList.add('boom');
-        btnShoot.removeEventListener("touchstart", shoot);
-        document.removeEventListener('keyup', xShoot);
+        setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 200);
         clearInterval(invaderId);
         clearInterval(bombDrop);
         setTimeout(() => grid.style.display = "none", 500);
@@ -355,9 +336,7 @@ function moveInvaders() {
 
     for (let i = 211; i <= squares.length - 1; i++) {
         if (squares[i].classList.contains('invader')) {
-            btnShoot.removeEventListener("touchstart", shoot);
-            document.removeEventListener('keyup', xShoot);
-            squares[i].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4');
+            squares[i].classList.remove('invader', 'invader1', 'invader2', 'invader3', 'invader4', 'boom');
             clearInterval(invaderId);
             clearInterval(bombDrop);
             setTimeout(() => grid.style.display = "none", 500);
@@ -499,7 +478,6 @@ function shoot() {
                 const alienTakenDown3 = alienInvaders3.indexOf(currentLaserIndex);
                 alienInvadersTakenDown3.push(alienTakenDown3);
                 alienInvadersTakenDown.push(alienInvadersTakenDown3);
-
             }
             if (squares[currentLaserIndex].classList.contains('invader2')) {
                 result = result + 30;
